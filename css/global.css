@@ -1,0 +1,61 @@
+html {
+  box-sizing: border-box;
+  position: relative;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  color:  var(--fonts-primary-variant, #6E6893);;
+}
+
+h1 {
+  margin: 0;
+}
+
+button {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+input,
+textarea {
+  color: inherit;
+  border: none;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: center;
+  white-space: nowrap;
+  background-color: rgba(0, 0, 0, 0.089);
+  z-index: 99;
+  cursor: pointer;
+  transition-property: opacity, visibility;
+  transition-duration: 0.36s;
+  transition-timing-function: ease-in-out;
+}
+
+.overlay:after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+

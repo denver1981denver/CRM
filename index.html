@@ -4,11 +4,193 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRM</title>
+  <title>crm</title>
 
-  <script defer src="script.js"></script>
+  <link rel="preload" href="fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-  
+  <div class="overlay">
+    <div class="modal">
+      <div class="modal__container">
+        <h1 class="modal__title">Добавить ТОВАР</h1>
+
+        <form action="https://jsonplaceholder.typicode.com/posts" method="post" target="_blank">
+          <fieldset class="modal__product">      
+            <div class="modal__input-wrapper">
+              <label class="modal__name">
+                <span class="modal__input-text">Наименование</span>
+                <input class="modal__input" type="text" name ="name">
+              </label>
+              
+              <label class="modal__category">
+                <span class="modal__input-text">Категория</span>  
+                <input class="modal__input" type="text" name="category">
+              </label>
+      
+              <label class="modal__units">
+                <span class="modal__input-text">Единицы измерения</span>
+                <input class="modal__input" type="text" name="units">
+              </label>
+      
+              <div class="modal__discount">
+                <input class=" modal__input-checkbox" type="checkbox" name="active">
+
+                <label>
+                  <span class="modal__input-text">Дисконт</span>
+                  <input class="modal__input-discount" type="text" name="discount">                   
+                </label>
+              </div>
+                
+              <label class="modal__description">
+                <span class="modal__input-text">Описание</span>
+                <textarea class="modal__input modal__textarea" name="description"></textarea>
+              </label>
+      
+              <label class="modal__label modal__quantity">
+                <span class="modal__input-text ">Количество</span>
+                <input class="modal__input" id="amount" type="number" name="amount">
+              </label>
+        
+              <label class="modal__label modal__price">
+                <span class="modal__input-text">Цена</span>
+                <input class="modal__input" type="numbe" name="price">
+              </label>
+
+              <label class="modal__add-file">
+                <input class="modal__input modal__input-file" type="file" accept="image/jpeg,image/png" multiple name="image">
+                <span class="modal__input-file-text">Добавить изображение</span>
+              </label> 
+              </div>
+            </fieldset>
+      
+      <div class="modal__wrapper-cost">
+        <label>
+          <p class="modal__description-total-cost">Итоговая стоимость:</p>
+        <output class="modal__total-cost" type="output">$ 900.00</output>
+        </label>
+        
+        <button class="modal__btn-add-product" type="submit">Добавить товар</button>
+      </div>
+      
+          </form>
+      
+          <button class="modal__btn-close">
+            <img src="image/close.svg" width="20" height="20" aria-label="Кнопка с крестиком дляч закрытия окна">   
+        </button>
+          </div>
+        </div>
+        
+        
+ 
+ 
+   
+   
+  </div>
+ 
+
+  <!-- <div class="">
+    <table border="1" width="1000" cellspacing="0">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Наименование</td>
+          <td>Категория</td>
+          <td>ед/изм</td>
+          <td>количество</td>
+          <td>цена</td>
+          <td>ИТОГ</td>
+          <td></td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td></td>
+          <td>Навигационная система Soundmax</td>
+          <td>Техника для дома</td>
+          <td>шт</td>
+          <td>5</td>
+          <td>$100</td>
+          <td>$500</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Настольная игра “На 4-х ногах”</td>
+          <td>Настольные игры</td>
+          <td>шт</td>
+          <td>12</td>
+          <td>$14</td>
+          <td>$168</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Навигационная система Soundmax</td>
+          <td>Техника для дома</td>
+          <td>шт</td>
+          <td>5</td>
+          <td>$100</td>
+          <td>$500</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Навигационная система Soundmax</td>
+          <td>Техника для дома</td>
+          <td>шт</td>
+          <td></td>
+          <td>$100</td>
+          <td>$500</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Навигационная система Soundmax</td>
+          <td>Техника для дома</td>
+          <td>шт</td>
+          <td>5</td>
+          <td>$100</td>
+          <td>$500</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Навигационная система Soundmax</td>
+          <td>Техника для дома</td>
+          <td>шт</td>
+          <td>5</td>
+          <td>$100</td>
+          <td>$500</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Навигационная система Soundmax</td>
+          <td>Техника для дома</td>
+          <td>шт</td>
+          <td>5</td>
+          <td>$100</td>
+          <td>$500</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Навигационная система Soundmax</td>
+          <td>Техника для дома</td>
+          <td>шт</td>
+          <td>5</td>
+          <td>$100</td>
+          <td>$500</td>
+          <td></td>
+        </tr>
+     </tbody>
+    </table>
+  </div> -->
+
 </body>
 </html>
