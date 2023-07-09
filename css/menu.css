@@ -1,0 +1,44 @@
+.menu {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: 15px 20px;
+	background-color: var(--backgrounds-primary, #fff);
+}
+
+.menu__btn-filter {
+	display: flex;
+	height: 40px;
+	gap: 10px;
+	margin-right: 20px;
+	padding: 11px 10px 10px;
+	border: 1px solid var(--fonts-stroke, #c6c2de);
+	border-radius: 6px;
+}
+
+.menu__btn-filter-text {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: normal;
+	color: var(--fonts-primary, #25213b);
+}
+
+.menu__form {
+	position: relative;
+	width: 392px;
+	height: 40px;
+}
+
+.menu__form-search {
+	width: 100%;
+	padding: 13px 132px 12px 40px;
+	font-size: 12px;
+	font-weight: 400;
+	color: var(--fonts-primary-variant, #6e6893);
+	border-radius: 6px;
+}
+.menu__form-btn {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}

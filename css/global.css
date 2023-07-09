@@ -11,7 +11,11 @@ html {
 
 body {
   font-family: Inter, sans-serif;
-  color:  var(--fonts-primary-variant, #6E6893);;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  background-color: var(--backgrounds-parent, #f2f0f9);
+  color: var(--fonts-primary, #25213B);
 }
 
 h1 {
@@ -35,16 +39,18 @@ input,
 textarea {
   color: inherit;
   border: none;
+  background-color: var(--backgrounds-stripe, #f4f2ff);
 }
 
 .overlay {
+  display: none;
   position: fixed;
   inset: 0;
   overflow-y: auto;
   overflow-x: hidden;
   text-align: center;
   white-space: nowrap;
-  background-color: rgba(0, 0, 0, 0.089);
+  background-color: rgba(0, 0, 0, 0.397);
   z-index: 99;
   cursor: pointer;
   transition-property: opacity, visibility;
@@ -59,3 +65,56 @@ textarea {
   height: 100%;
 }
 
+.total-cost {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+  gap: 5px;
+  /* padding: 0 28px; */
+  padding-bottom: 2px;
+}
+
+
+
+.total-cost__description {
+	margin: 0;
+	display: inline-block;
+	font-size: 14px;
+	line-height: 17px;
+  text-transform: none;
+  color: var(--fonts-primary-variant, #6E6893);
+}
+
+.total-cost__price {
+  font-weight: 700;
+  font-size: 18px;
+	line-height: 22px;
+	color: var(--primary, #6d5bd0);
+}
+
+.btn-add-product {
+ height: 39px;
+	padding: 10px 25px;
+  font-size: 16px;
+  font-weight: 600;
+	line-height: 19px;
+	text-transform: uppercase;
+	background-color: var(--primary, #6d5bd0);
+	color: var(--backgrounds-primary, #fff);
+	border-radius: 6px;
+}
+
+.btn-add-product-cms {
+  min-width: 181px;
+  margin-left: auto;
+  padding: 10px 15px 10px 16px;
+}
+
+.btn-add-product-modal {
+  min-width: 200px;
+  padding: 10px 25px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}

@@ -6,13 +6,241 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>crm</title>
 
-  <link rel="preload" href="fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-semiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-bold.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+  <div class="cms container">
+    <div class="cms__header">
+      <h1 class="cms__title">cms</h1>
+
+      <div class="total-cost total-cost__cms">
+        <p class="total-cost__description">Итоговая стоимость:</p>
+        <span class="total-cost__price">$ 900.00</span>
+      </div>
+    </div>
+
+      <div class="cms__wrapper">
+        <div class="cms__menu menu">
+          <button class="menu__btn-filter">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12L20 4V0H0V4L8 12V20L12 16V12Z" fill="#8B83BA"/>
+            </svg>
+              
+            <span class="menu__btn-filter-text">Фильтр</span>
+          </button>
+  
+          <form class="menu__form">
+            <input class="menu__form-search" type="search" placeholder="Поиск по наименованию и категории">
+            <button class="menu__form-btn" type="submit">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.4097 14.8822C11.7399 16.1799 9.63851 16.7922 7.53338 16.5942C5.42824 16.3963 3.47766 15.403 2.07881 13.8166C0.679961 12.2303 -0.0619809 10.1701 0.00405863 8.05565C0.0700982 5.94118 0.939153 3.9314 2.43427 2.43552C3.92939 0.939633 5.93814 0.0701341 8.05152 0.00406071C10.1649 -0.0620127 12.224 0.680308 13.8096 2.07988C15.3951 3.47944 16.3879 5.43102 16.5857 7.53723C16.7836 9.64345 16.1717 11.7459 14.8745 13.4166L19.6936 18.2201C20.1016 18.6267 20.1022 19.2872 19.695 19.6946C19.2878 20.1021 18.6273 20.1017 18.2204 19.6939L13.4201 14.8822H13.4097ZM8.31916 14.5495C9.13773 14.5495 9.94829 14.3882 10.7045 14.0748C11.4608 13.7614 12.148 13.302 12.7268 12.7229C13.3056 12.1438 13.7647 11.4563 14.078 10.6996C14.3913 9.94298 14.5525 9.13201 14.5525 8.31302C14.5525 7.49403 14.3913 6.68306 14.078 5.92641C13.7647 5.16976 13.3056 4.48225 12.7268 3.90314C12.148 3.32402 11.4608 2.86465 10.7045 2.55123C9.94829 2.23782 9.13773 2.07651 8.31916 2.07651C6.66598 2.07651 5.08051 2.73356 3.91153 3.90314C2.74256 5.07271 2.08583 6.659 2.08583 8.31302C2.08583 9.96705 2.74256 11.5533 3.91153 12.7229C5.08051 13.8925 6.66598 14.5495 8.31916 14.5495Z" fill="#8B83BA"/>
+              </svg> 
+            </button>
+          </form>
+          
+          <button class="btn-add-product btn-add-product-cms ">Добавить товар</button>
+        </div>
+     
+
+        <table border="1"  cellspacing="0">
+          
+          <thead>
+            <tr class="table__head">
+              <th class="id">id</th>
+              <th class="name">Наименование</th>
+              <th class="category">Категория</th>
+              <th class="unit">ед/изм</th>
+              <th class="q">количество</th>
+              <th class="price a">цена</th>
+              <th class="price a">итог</th>
+              <th class="img"></th>
+            </tr>
+          </thead>
+    
+          <tbody>
+            <tr>
+              <td class="id">246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="units">шт</td>
+              <td class="quantity">5</td>
+              <td class="price">$100</td>
+              <td class="price">$500</td>
+              <td class="img">
+               <button class="icon">
+                <svg class="color" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M18.75 2.13375L17.8663 1.25L1.25 17.8663L2.13375 18.75L3.38375 17.5H16.25C16.5814 17.4995 16.899 17.3676 17.1333 17.1333C17.3676 16.899 17.4995 16.5814 17.5 16.25V3.38375L18.75 2.13375ZM16.25 16.25H4.63375L9.50437 11.3794L10.9913 12.8663C11.2257 13.1006 11.5435 13.2322 11.875 13.2322C12.2065 13.2322 12.5243 13.1006 12.7587 12.8663L13.75 11.875L16.25 14.3731V16.25ZM16.25 12.605L14.6337 10.9888C14.3993 10.7544 14.0815 10.6228 13.75 10.6228C13.4185 10.6228 13.1007 10.7544 12.8663 10.9888L11.875 11.98L10.3894 10.4944L16.25 4.63375V12.605Z" />
+                  <path d="M3.75 13.75V11.875L6.875 8.75187L7.73313 9.61062L8.61812 8.72563L7.75875 7.86625C7.52434 7.63191 7.20646 7.50027 6.875 7.50027C6.54354 7.50027 6.22566 7.63191 5.99125 7.86625L3.75 10.1075V3.75H13.75V2.5H3.75C3.41858 2.50033 3.10083 2.63213 2.86648 2.86648C2.63213 3.10083 2.50033 3.41858 2.5 3.75V13.75H3.75Z" />
+                </svg>
+               </button>
+                 
+               <button class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M15.5629 4.86078L17.6394 6.93629L15.5629 4.86078ZM16.8982 3.03233L11.2834 8.64709C10.9933 8.9368 10.7955 9.3059 10.7148 9.70789L10.1962 12.304L12.7923 11.7844C13.1942 11.704 13.5629 11.5069 13.8531 11.2167L19.4678 5.60196C19.6366 5.43324 19.7704 5.23293 19.8617 5.01248C19.953 4.79203 20 4.55576 20 4.31714C20 4.07853 19.953 3.84225 19.8617 3.6218C19.7704 3.40136 19.6366 3.20105 19.4678 3.03233C19.2991 2.8636 19.0988 2.72976 18.8784 2.63845C18.6579 2.54714 18.4216 2.50014 18.183 2.50014C17.9444 2.50014 17.7081 2.54714 17.4877 2.63845C17.2672 2.72976 17.0669 2.8636 16.8982 3.03233V3.03233Z" stroke="#6E6893" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M18.0394 14.2648V17.206C18.0394 17.726 17.8328 18.2248 17.4651 18.5925C17.0973 18.9602 16.5986 19.1668 16.0786 19.1668H5.29415C4.77411 19.1668 4.27537 18.9602 3.90765 18.5925C3.53993 18.2248 3.33334 17.726 3.33334 17.206V6.42157C3.33334 5.90154 3.53993 5.4028 3.90765 5.03508C4.27537 4.66735 4.77411 4.46077 5.29415 4.46077H8.23535" stroke="#6E6893" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+               </button>
+                    
+               <button class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M7.03125 3.59375H6.875C6.96094 3.59375 7.03125 3.52344 7.03125 3.4375V3.59375H12.9688V3.4375C12.9688 3.52344 13.0391 3.59375 13.125 3.59375H12.9688V5H14.375V3.4375C14.375 2.74805 13.8145 2.1875 13.125 2.1875H6.875C6.18555 2.1875 5.625 2.74805 5.625 3.4375V5H7.03125V3.59375ZM16.875 5H3.125C2.7793 5 2.5 5.2793 2.5 5.625V6.25C2.5 6.33594 2.57031 6.40625 2.65625 6.40625H3.83594L4.31836 16.6211C4.34961 17.2871 4.90039 17.8125 5.56641 17.8125H14.4336C15.1016 17.8125 15.6504 17.2891 15.6816 16.6211L16.1641 6.40625H17.3438C17.4297 6.40625 17.5 6.33594 17.5 6.25V5.625C17.5 5.2793 17.2207 5 16.875 5ZM14.2832 16.4062H5.7168L5.24414 6.40625H14.7559L14.2832 16.4062Z" fill="#6E6893"/>
+                  </svg>
+               </button>
+                     
+                
+                
+              </td>
+            </tr>
+            <tr>
+              <td class="id">937295527</td>
+              <td>Настольная игра “На 4-х ногах”</td>
+              <td>Настольные игры</td>
+              <td class="units">шт</td>
+              <td class="quantity">14</td>
+              <td class="price">$14</td>
+              <td class="price">$168</td>
+              <td class="img">
+                <button>
+                  <svg class="ooo" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M17.7778 2.22223H2.22223C1.92754 2.22223 1.64493 2.33929 1.43655 2.54767C1.22818 2.75604 1.11111 3.03866 1.11111 3.33334V16.6667C1.11111 16.9614 1.22818 17.244 1.43655 17.4523C1.64493 17.6607 1.92754 17.7778 2.22223 17.7778H17.7778C18.0725 17.7778 18.3551 17.6607 18.5635 17.4523C18.7718 17.244 18.8889 16.9614 18.8889 16.6667V3.33334C18.8889 3.03866 18.7718 2.75604 18.5635 2.54767C18.3551 2.33929 18.0725 2.22223 17.7778 2.22223ZM2.22223 16.6667V3.33334H17.7778V16.6667H2.22223Z"/>
+                    <path d="M4.95555 7.77778C5.28518 7.77778 5.60741 7.68003 5.8815 7.49689C6.15558 7.31376 6.3692 7.05346 6.49535 6.74892C6.62149 6.44437 6.6545 6.10926 6.59019 5.78596C6.52588 5.46266 6.36715 5.16569 6.13406 4.9326C5.90097 4.69951 5.604 4.54078 5.2807 4.47647C4.9574 4.41216 4.62228 4.44516 4.31774 4.57131C4.0132 4.69746 3.7529 4.91108 3.56976 5.18516C3.38663 5.45924 3.28888 5.78147 3.28888 6.11111C3.28888 6.55314 3.46447 6.97706 3.77703 7.28962C4.0896 7.60218 4.51352 7.77778 4.95555 7.77778ZM4.95555 5.22222C5.13158 5.22112 5.30399 5.27232 5.45089 5.36932C5.5978 5.46632 5.71259 5.60476 5.78072 5.76708C5.84885 5.9294 5.86725 6.1083 5.83358 6.28109C5.79992 6.45389 5.7157 6.61279 5.59161 6.73766C5.46752 6.86253 5.30915 6.94774 5.13657 6.98249C4.96399 7.01724 4.78498 6.99997 4.62223 6.93285C4.45949 6.86574 4.32033 6.75182 4.22241 6.60552C4.12449 6.45923 4.07222 6.28715 4.07221 6.11111C4.07367 5.87729 4.1672 5.65345 4.33255 5.48811C4.49789 5.32277 4.72172 5.22923 4.95555 5.22778V5.22222Z" fill="#6E6893"/>
+                    <path d="M12.6555 8.53889L9.65555 11.5389L7.43332 9.31666C7.32923 9.21319 7.18843 9.15511 7.04166 9.15511C6.89489 9.15511 6.75408 9.21319 6.64999 9.31666L3.28888 12.7222V14.2944L7.0611 10.5222L8.88888 12.3222L6.80555 14.4056H8.33332L13.0278 9.71111L16.6667 13.3333V11.7667L13.4389 8.53889C13.3348 8.43541 13.194 8.37733 13.0472 8.37733C12.9004 8.37733 12.7596 8.43541 12.6555 8.53889Z" fill="#6E6893"/>
+                    </svg>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="id">246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="units">шт</td>
+              <td class="quantity">5</td>
+              <td class="price">$100</td>
+              <td class="price">$500</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="id">246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="units">шт</td>
+              <td class="quantity">5</td>
+              <td class="price">$100</td>
+              <td class="price">$500</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="id">246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="units">шт</td>
+              <td class="quantity">5</td>
+              <td class="price">$100</td>
+              <td class="price">$500</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="id">246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="units">шт</td>
+              <td class="quantity">5</td>
+              <td class="price">$100</td>
+              <td class="price">$500</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="id">246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="units">шт</td>
+              <td class="quantity">5</td>
+              <td class="price">$100</td>
+              <td class="price">$500</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="id">246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="units">шт</td>
+              <td class="quantity">5</td>
+              <td class="price">$100</td>
+              <td class="price">$500</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="id">246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="units">шт</td>
+              <td class="quantity">5</td>
+              <td class="price">$100</td>
+              <td>$500</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="id">246016548</td>
+              <td>Навигационная система Soundmax</td>
+              <td>Техника для дома</td>
+              <td class="units">шт</td>
+              <td class="quantity">5</td>
+              <td class="price">$100</td>
+              <td class="price">$500</td>
+              <td></td>
+            </tr>
+         </tbody>
+
+         <tfoot class="table__footer">
+          <tr class="zz">
+            <td class="table__footer" colspan="8">
+              <div class="table__footer-wrap">
+                <div class="pages">
+                  <p>Показывать на странице: 10</p>
+                  <button type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
+                      <path d="M4 5L0 0H8L4 5Z" fill="#6E6893"/>
+                      </svg>
+                  </button>
+                </div>
+
+                <p class="number">
+                  1-10 of 276
+                </p>
+
+                <div class="arrows">
+                  <button type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                      <path d="M5.79971 1.10636C6.42812 0.51287 5.43313 -0.426818 4.80472 0.216126L0.196378 4.51891C-0.0654595 4.7662 -0.0654595 5.21131 0.196378 5.4586L4.80472 9.81084C5.43313 10.4043 6.42812 9.46464 5.79971 8.87115L1.71504 5.01348L5.79971 1.10636Z" fill="#6E6893"/>
+                      </svg>
+                  </button>
+                  <button type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                      <path d="M0.200293 1.10636C-0.428118 0.51287 0.566865 -0.426818 1.19528 0.216126L5.80362 4.51891C6.06546 4.7662 6.06546 5.21131 5.80362 5.4586L1.19528 9.81084C0.566865 10.4043 -0.428118 9.46464 0.200293 8.87115L4.28496 5.01348L0.200293 1.10636Z" fill="#6E6893"/>
+                      </svg>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+         </tfoot>
+        </table>
+      </div>
+
+     
+   
+
+    
+  </div> 
+
+
+
   <div class="overlay">
     <div class="modal">
       <div class="modal__container">
@@ -57,140 +285,53 @@
         
               <label class="modal__label modal__price">
                 <span class="modal__input-text">Цена</span>
-                <input class="modal__input" type="numbe" name="price">
+                <input class="modal__input" type="number" name="price">
               </label>
 
               <label class="modal__add-file">
                 <input class="modal__input modal__input-file" type="file" accept="image/jpeg,image/png" multiple name="image">
                 <span class="modal__input-file-text">Добавить изображение</span>
               </label> 
-              </div>
-            </fieldset>
+            </div>
+          </fieldset>
       
-      <div class="modal__wrapper-cost">
-        <label>
-          <p class="modal__description-total-cost">Итоговая стоимость:</p>
-        <output class="modal__total-cost" type="output">$ 900.00</output>
-        </label>
+          <div class="total-cost">
+            <div>
+              <p class="total-cost__description">Итоговая стоимость:</p>
+              <output class="total-cost__price">$ 900.00</output>
+            </div>
         
-        <button class="modal__btn-add-product" type="submit">Добавить товар</button>
-      </div>
-      
-          </form>
-      
-          <button class="modal__btn-close">
-            <img src="image/close.svg" width="20" height="20" aria-label="Кнопка с крестиком дляч закрытия окна">   
-        </button>
+            <button class="btn-add-product btn-add-product-modal" type="submit">Добавить товар</button>
           </div>
-        </div>
-        
-        
- 
- 
-   
-   
+        </form>
+      
+        <button class="modal__btn-close">
+      
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L22 22" stroke="#6E6893" stroke-width="3" stroke-linecap="round"/>
+            <path d="M2 22L22 2" stroke="#6E6893" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+            
+        </button>
+      </div>
+    </div>
   </div>
- 
 
-  <!-- <div class="">
-    <table border="1" width="1000" cellspacing="0">
-      <thead>
-        <tr>
-          <td>ID</td>
-          <td>Наименование</td>
-          <td>Категория</td>
-          <td>ед/изм</td>
-          <td>количество</td>
-          <td>цена</td>
-          <td>ИТОГ</td>
-          <td></td>
-        </tr>
-      </thead>
 
-      <tbody>
-        <tr>
-          <td></td>
-          <td>Навигационная система Soundmax</td>
-          <td>Техника для дома</td>
-          <td>шт</td>
-          <td>5</td>
-          <td>$100</td>
-          <td>$500</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Настольная игра “На 4-х ногах”</td>
-          <td>Настольные игры</td>
-          <td>шт</td>
-          <td>12</td>
-          <td>$14</td>
-          <td>$168</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Навигационная система Soundmax</td>
-          <td>Техника для дома</td>
-          <td>шт</td>
-          <td>5</td>
-          <td>$100</td>
-          <td>$500</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Навигационная система Soundmax</td>
-          <td>Техника для дома</td>
-          <td>шт</td>
-          <td></td>
-          <td>$100</td>
-          <td>$500</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Навигационная система Soundmax</td>
-          <td>Техника для дома</td>
-          <td>шт</td>
-          <td>5</td>
-          <td>$100</td>
-          <td>$500</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Навигационная система Soundmax</td>
-          <td>Техника для дома</td>
-          <td>шт</td>
-          <td>5</td>
-          <td>$100</td>
-          <td>$500</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Навигационная система Soundmax</td>
-          <td>Техника для дома</td>
-          <td>шт</td>
-          <td>5</td>
-          <td>$100</td>
-          <td>$500</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Навигационная система Soundmax</td>
-          <td>Техника для дома</td>
-          <td>шт</td>
-          <td>5</td>
-          <td>$100</td>
-          <td>$500</td>
-          <td></td>
-        </tr>
-     </tbody>
-    </table>
-  </div> -->
+  <!-- <svg width="30" height="30">
+    <use xlink:href="#delete" />
+  </svg>
+
+  <svg style="display: none">
+    <symbol id="edit" viewbox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.75 21.2663L14.2662 21.2475L26.3062 9.3225C26.7787 8.85 27.0387 8.2225 27.0387 7.555C27.0387 6.8875 26.7787 6.26 26.3062 5.7875L24.3237 3.805C23.3787 2.86 21.73 2.865 20.7925 3.80125L8.75 15.7288V21.2663V21.2663ZM22.5562 5.5725L24.5425 7.55125L22.5462 9.52875L20.5637 7.5475L22.5562 5.5725ZM11.25 16.7713L18.7875 9.305L20.77 11.2875L13.2337 18.7513L11.25 18.7575V16.7713Z" />
+      <path d="M6.25 26.25H23.75C25.1288 26.25 26.25 25.1288 26.25 23.75V12.915L23.75 15.415V23.75H10.1975C10.165 23.75 10.1313 23.7625 10.0988 23.7625C10.0575 23.7625 10.0163 23.7513 9.97375 23.75H6.25V6.25H14.8088L17.3088 3.75H6.25C4.87125 3.75 3.75 4.87125 3.75 6.25V23.75C3.75 25.1288 4.87125 26.25 6.25 26.25Z" />
+    </symbol>
+    <symbol id="delete" viewbox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.75 6H17.25C17.25 5.40326 17.0129 4.83097 16.591 4.40901C16.169 3.98705 15.5967 3.75 15 3.75C14.4033 3.75 13.831 3.98705 13.409 4.40901C12.9871 4.83097 12.75 5.40326 12.75 6V6ZM11.25 6C11.25 5.00544 11.6451 4.05161 12.3483 3.34835C13.0516 2.64509 14.0054 2.25 15 2.25C15.9946 2.25 16.9484 2.64509 17.6517 3.34835C18.3549 4.05161 18.75 5.00544 18.75 6H26.25C26.4489 6 26.6397 6.07902 26.7803 6.21967C26.921 6.36032 27 6.55109 27 6.75C27 6.94891 26.921 7.13968 26.7803 7.28033C26.6397 7.42098 26.4489 7.5 26.25 7.5H24.669L22.878 23.016C22.7514 24.1128 22.226 25.1248 21.4018 25.8594C20.5776 26.594 19.5121 26.9999 18.408 27H11.592C10.4879 26.9999 9.42242 26.594 8.59821 25.8594C7.77399 25.1248 7.2486 24.1128 7.122 23.016L5.331 7.5H3.75C3.55109 7.5 3.36032 7.42098 3.21967 7.28033C3.07902 7.13968 3 6.94891 3 6.75C3 6.55109 3.07902 6.36032 3.21967 6.21967C3.36032 6.07902 3.55109 6 3.75 6H11.25ZM13.5 12C13.5 11.8011 13.421 11.6103 13.2803 11.4697C13.1397 11.329 12.9489 11.25 12.75 11.25C12.5511 11.25 12.3603 11.329 12.2197 11.4697C12.079 11.6103 12 11.8011 12 12V21C12 21.1989 12.079 21.3897 12.2197 21.5303C12.3603 21.671 12.5511 21.75 12.75 21.75C12.9489 21.75 13.1397 21.671 13.2803 21.5303C13.421 21.3897 13.5 21.1989 13.5 21V12ZM17.25 11.25C17.0511 11.25 16.8603 11.329 16.7197 11.4697C16.579 11.6103 16.5 11.8011 16.5 12V21C16.5 21.1989 16.579 21.3897 16.7197 21.5303C16.8603 21.671 17.0511 21.75 17.25 21.75C17.4489 21.75 17.6397 21.671 17.7803 21.5303C17.921 21.3897 18 21.1989 18 21V12C18 11.8011 17.921 11.6103 17.7803 11.4697C17.6397 11.329 17.4489 11.25 17.25 11.25Z" />
+    </symbol>
+  </svg> -->
+
 
 </body>
 </html>
