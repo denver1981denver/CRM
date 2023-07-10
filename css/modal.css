@@ -67,7 +67,6 @@
 .modal__discount {
 	position: relative;
 	grid-area: discount;
-	
 }
 
 .modal__description {
@@ -91,7 +90,6 @@
 .modal__input {
 	width: 100%;
   padding: 10px;
-	
 }
 
 .modal__input,

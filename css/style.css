@@ -2,6 +2,7 @@
 @import url(fonts.css);
 @import url(var.css);
 @import url(global.css);
+@import url(btn-add-product.css);
 @import url(cms.css);
 @import url(table.css);
 @import url(menu.css);
