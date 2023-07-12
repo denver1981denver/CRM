@@ -18,7 +18,8 @@ body {
   color: var(--fonts-primary, #25213B);
 }
 
-h1 {
+h1,
+p {
   margin: 0;
 }
 
@@ -40,6 +41,10 @@ textarea {
   color: inherit;
   border: none;
   background-color: var(--backgrounds-stripe, #f4f2ff);
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
 }
 
 .overlay {
@@ -65,34 +70,3 @@ textarea {
   height: 100%;
 }
 
-.total-cost {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-  gap: 5px;
-  /* padding: 0 28px; */
-  padding-bottom: 2px;
-}
-
-.total-cost__description {
-
-	display: inline-block;
-  	margin: 0;
-	font-size: 14px;
-	line-height: 17px;
-  text-transform: none;
-  color: var(--fonts-primary-variant, #6E6893);
-}
-
-.total-cost__price {
-  font-weight: 700;
-  font-size: 18px;
-	line-height: 22px;
-	color: var(--primary, #6d5bd0);
-}
-
-
-
-input[type="search"]::-webkit-search-cancel-button {
-  display: none;
-}

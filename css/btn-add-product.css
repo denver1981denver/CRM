@@ -1,9 +1,7 @@
 .btn-add-product {
   height: 39px;
-  padding: 10px 25px;
   font-size: 16px;
   font-weight: 600;
-  line-height: 19px;
   text-transform: uppercase;
   background-color: var(--primary, #6d5bd0);
   color: var(--backgrounds-primary, #fff);
@@ -13,11 +11,13 @@
 
 .btn-add-product:hover, 
 .btn-add-product:focus-visible {
-  background-color: #ada4dc;
+  background-color: var( --fonts-stroke, #c6c2de);
+  color: var(--primary, #6d5bd0);
 }
 
 .btn-add-product:active {
-  background-color: #4b3e8d
+  background-color: var(--fonts-primary-variant, #6e6893);
+  color: var(--backgrounds-primary, #fff);
 }
 
 .btn-add-product-cms {
