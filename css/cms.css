@@ -1,16 +1,18 @@
 .container {
-	max-width: 1100px;
+	max-width: 1140px;
 	margin: 0 auto;
-	padding-top: 79px;
-	padding-bottom: 110px;
+	padding: 79px 20px 110px;
 }
 
 .cms__header {
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-between;
+	flex-wrap: wrap;
+	column-gap: 10px;
+	row-gap: 0;
 	margin-bottom: 21px;
-	padding: 0 22px 7px;
+	padding: 0 16px 7px 19px;
 	border-bottom: 1px solid var(--fonts-stroke, #c6c2de);
 }
 
@@ -24,6 +26,5 @@
 
 .cms__wrapper {
 	filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
-	border-radius: 15px;
-	background-color: var(--backgrounds-primary, #fff); 
 }
+

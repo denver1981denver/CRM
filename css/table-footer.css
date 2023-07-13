@@ -1,0 +1,48 @@
+.table-footer-tr {
+	height: 45px;
+}
+
+.table-footer-td {
+	height: 45px;
+	background-color: var(--backgrounds-stripe, #f4f2ff);
+	border-radius: 0 0 10px 10px;
+}
+
+.table__footer-wrap {
+	display: flex;
+	justify-content: flex-end;
+	gap: 50px;
+	padding-right: 18px;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.6px;
+	color: var(--fonts-primary-variant, #6e6893);
+}
+
+.table__footer-pages {
+	display: flex;
+	gap: 5px;
+}
+
+.table__footer-btn-pages {
+	transform: translateY(-2px);
+}
+
+.table__footer-arrows {
+	display: flex;
+	gap: 50px;
+}
+
+.table__footer-btn {
+	color: var(--fonts-primary-variant, #6e6893);
+	transition: all 0.3s ease-in-out;
+}
+
+.table__footer-btn:hover,
+.table__footer-btn:focus-visible {
+	color: var(--fonts-stroke, #c6c2de);
+}
+
+.table__footer-btn:active {
+	color: var(--fonts-primary, #25213b);
+}
