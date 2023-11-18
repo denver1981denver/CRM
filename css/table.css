@@ -1,0 +1,94 @@
+.cms__table-wrapper {
+	overflow-x: auto;
+}
+
+.table {
+	max-width: 1100px;
+	min-width: 980px;
+	border-spacing: 0px 1px;
+}
+
+.table__body {
+	background-color: var(--backgrounds-primary, #fff);
+}
+
+.table__head {
+	height: 45px;
+	font-size: 12px;
+	font-weight: 600;
+	text-align: left;
+	letter-spacing: 0.6px;
+	text-transform: uppercase;
+	background-color: var(--backgrounds-stripe, #f4f2ff);
+	color: var(--fonts-primary-variant, #6e6893);
+}
+
+.table__id {
+	width: 108px;
+	padding-left: 15px;
+}
+
+.table__name {
+	width: 304px;
+}
+
+.table__category {
+	width: 175px;
+}
+
+.table__units {
+	width: 67px;
+	padding-right: 12px;
+	text-align: center;
+	color: var(--fonts-primary-variant, #6e6893);
+}
+
+.table__quantity {
+	width: 91px;
+	text-align: center;
+}
+
+.table__price,
+.table__total {
+	width: 95px;
+	text-align: right;
+}
+
+.table__icon {
+	min-width: 165px;
+	padding-top: 4px;
+	padding-right: 15px;
+	text-align: right;
+}
+
+.table__btn-icon {
+	color: var(--fonts-primary-variant, #6e6893);
+	transition: all 0.3s ease-in-out;
+}
+
+.table__btn-icon:not(:last-child) {
+	margin-right: 16px;
+}
+
+.table__btn-icon:hover,
+.table__btn-icon:focus-visible {
+	color: var(--fonts-stroke, #c6c2de);
+}
+
+.table__btn-icon:active {
+	color: var(--fonts-primary, #25213b);
+}
+
+.stroke {
+	stroke: var(--fonts-primary-variant, #6e6893);
+	transition: all 0.3s ease-in-out;
+}
+
+.table__btn-icon:hover .stroke,
+.table__btn-icon:focus-visible .stroke {
+	stroke: var(--fonts-stroke, #c6c2de);
+}
+
+.table__btn-icon:active .stroke {
+	stroke: var(--fonts-primary, #25213b);
+}

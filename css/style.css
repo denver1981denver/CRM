@@ -1,0 +1,11 @@
+@import url(normalize.css);
+@import url(fonts.css);
+@import url(var.css);
+@import url(global.css);
+@import url(cms.css);
+@import url(total-cost.css);
+@import url(menu.css);
+@import url(btn-add-product.css);
+@import url(table.css);
+@import url(table-footer.css);
+@import url(modal.css);

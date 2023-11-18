@@ -1,0 +1,242 @@
+.modal {
+	position: relative;
+	margin: auto;
+	font-weight: 600;
+	text-transform: uppercase;
+	text-align: left;
+	background-color: var(--backgrounds-parent, #f2f0f9);
+	color: var(--fonts-primary-variant, #6e6893);
+	box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+	cursor: default;
+}
+
+.modal__container {
+	padding: 32px 106px 39px;
+}
+
+.modal__heading-wrapper {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 22px;
+	padding-bottom: 21px;
+	border-bottom: solid 1px var(--fonts-stroke, #c6c2de);
+}
+
+.modal__title {
+	font-weight: 700;
+	font-size: 24px;
+	line-height: normal;
+	letter-spacing: 0.1em;
+}
+
+.modal__id {
+	display: none;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: normal;
+	text-transform: uppercase;
+	color: var(--fonts-id, #c5c5c5);
+}
+
+.modal__product {
+	margin-bottom: 28px;
+}
+
+.modal__input-wrapper {
+	display: grid;
+	grid-template-columns: repeat(2, 250px);
+	grid-template-rows: repeat(5, 60px);
+	grid-template-areas:
+		"name     description"
+		"category description"
+		"units    quantity"
+		"discount price"
+		"...      add-file";
+	gap: 12px 24px;
+	padding: 28px;
+	background-color: var(--backgrounds-primary, #fff);
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+}
+
+.modal__name {
+	grid-area: name;
+}
+
+.modal__category {
+	grid-area: category;
+}
+
+.modal__units {
+	grid-area: units;
+}
+
+.modal__input-discount {
+	display: block;
+	max-width: 200px;
+	margin-left: auto;
+}
+
+.modal__discount {
+	position: relative;
+	grid-area: discount;
+}
+
+.modal__description {
+	grid-area: description;
+}
+
+.modal__quantity {
+	grid-area: quantity;
+}
+
+.modal__price {
+	grid-area: price;
+}
+
+.modal__add-file {
+	grid-area: add-file;
+	position: relative;
+	align-self: end;
+}
+
+.modal__input {
+	width: 100%;
+	padding: 10px;
+}
+
+.modal__input,
+.modal__input-discount,
+.modal__input-checkbox {
+	min-height: 40px;
+	background-color: var(--backgrounds-stripe, #f4f2ff);
+	border-radius: 6px;
+}
+
+.modal__input-text {
+	display: block;
+	margin-bottom: 5px;
+	padding-left: 11px;
+	font-size: 12px;
+	line-height: 15px;
+	letter-spacing: 0.6px;
+}
+
+.modal__input-checkbox {
+	position: absolute;
+	display: block;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.modal__input-checkbox:after {
+	content: "";
+	position: absolute;
+	display: inline-block;
+	top: 20px;
+	width: 40px;
+	height: 40px;
+	background-color: var(--backgrounds-stripe, #f4f2ff);
+	border-radius: 6px;
+}
+
+.modal__input-checkbox:checked:after {
+	background-image: url(../image/check.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.modal__textarea {
+	width: 100%;
+	min-height: 112px;
+	resize: none;
+}
+
+.modal__input-file {
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	opacity: 0;
+	z-index: -1;
+}
+
+.modal__input-file-text {
+	display: block;
+	min-height: 39px;
+	padding: 11px 20px;
+	font-size: 14px;
+	line-height: normal;
+	text-align: center;
+	text-transform: uppercase;
+	background-color: var(--primary, #6d5bd0);
+	color: var(--backgrounds-primary, #fff);
+	border-radius: 6px;
+}
+
+.modal__btn-add-product {
+	min-width: 200px;
+	padding: 10px 25px;
+	line-height: 19px;
+	text-transform: inherit;
+	background-color: var(--primary, #6d5bd0);
+	color: var(--backgrounds-primary, #fff);
+	border-radius: 6px;
+}
+
+.modal__btn-close {
+	position: absolute;
+	top: 18px;
+	right: 26px;
+}
+
+@media (max-width: 850px) {
+	.modal__container {
+		padding-right: 5vw;
+		padding-left: 5vw;
+	}
+
+	.modal__input-wrapper {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px 10px;
+	}
+}
+
+@media (max-width: 580px) {
+	.modal__input-wrapper {
+		grid-template-columns: repeat(1fr);
+		grid-template-rows: repeat(9, 60px);
+		grid-template-areas:
+			"name "
+			"category"
+			"units "
+			"discount"
+			"description"
+			"description"
+			"quantity"
+			"price"
+			"add-file";
+	}
+
+	.modal__wrapper-cost {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		justify-content: space-between;
+		gap: 15px;
+	}
+
+	.modal__container {
+		padding-right: 10px;
+		padding-left: 10px;
+		max-width: 350px;
+	}
+}
+
+@media (max-width: 350px) {
+	.modal__btn-close {
+		top: 10px;
+		right: 20px;
+	}
+}

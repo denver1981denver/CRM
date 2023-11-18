@@ -1,0 +1,75 @@
+html {
+	box-sizing: border-box;
+	position: relative;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+body {
+	min-width: 320px;
+	min-height: 100vh;
+	font-family: Inter, sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: normal;
+	background-color: var(--backgrounds-parent, #f2f0f9);
+	color: var(--fonts-primary, #25213b);
+}
+
+h1,
+h2,
+p {
+	margin: 0;
+}
+
+button {
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+input,
+textarea {
+	color: inherit;
+	border: none;
+	background-color: var(--backgrounds-stripe, #f4f2ff);
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+	display: none;
+}
+
+tr {
+	height: 59px;
+}
+
+.overlay {
+	display: none;
+	position: fixed;
+	inset: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	text-align: center;
+	white-space: nowrap;
+	background-color: rgba(0, 0, 0, 0.397);
+	z-index: 99;
+	cursor: pointer;
+	transition-property: opacity, visibility;
+	transition-duration: 0.36s;
+	transition-timing-function: ease-in-out;
+}
+
+.overlay-on {
+	display: flex;
+}

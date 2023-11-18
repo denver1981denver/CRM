@@ -1,0 +1,38 @@
+.btn-add-product {
+	height: 39px;
+	font-size: 16px;
+	font-weight: 600;
+	text-transform: uppercase;
+	background-color: var(--primary, #6d5bd0);
+	color: var(--backgrounds-primary, #fff);
+	border-radius: 6px;
+	transition: all 0.3s ease-in-out;
+}
+
+.btn-add-product-cms:hover,
+.btn-add-product-cms:focus-visible {
+	background-color: var(--fonts-stroke, #c6c2de);
+	color: var(--primary, #6d5bd0);
+}
+
+.btn-add-product-cms:active {
+	background-color: var(--fonts-primary-variant, #6e6893);
+	color: var(--backgrounds-primary, #fff);
+}
+
+.btn-add-product-cms {
+	min-width: 181px;
+	margin-left: auto;
+	padding: 10px 15px 10px 16px;
+}
+
+.btn-add-product-modal {
+	min-width: 200px;
+	padding: 10px 25px;
+}
+
+@media (max-width: 680px) {
+	.btn-add-product-cms {
+		margin: 0;
+	}
+}

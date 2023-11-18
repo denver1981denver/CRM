@@ -1,0 +1,119 @@
+.menu {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: 20px;
+	padding: 15px 20px;
+	background-color: var(--backgrounds-primary, #fff);
+	border-radius: 10px 10px 0 0;
+}
+
+.menu__btn-filter {
+	display: flex;
+	width: 108px;
+	height: 40px;
+	gap: 10px;
+	padding: 8px 9px 10px;
+	border: 1px solid var(--fonts-stroke, #c6c2de);
+	border-radius: 6px;
+	transition: all 0.3s ease-in-out;
+}
+
+.menu__btn-filter:hover,
+.menu__btn-filter:focus-visible {
+	background-color: var(--fonts-stroke, #c6c2de);
+}
+
+.menu__btn-filter:active {
+	background-color: var(--fonts-primary-variant, #6e6893);
+}
+
+.menu__btn-filter-icon {
+	color: var(--fonts-primary-icon, #8b83ba);
+	transition: all 0.3s ease-in-out;
+}
+
+.menu__btn-filter:hover .menu__btn-filter-icon,
+.menu__btn-filter:focus-visible .menu__btn-filter-icon {
+	color: var(--backgrounds-parent, #f2f0f9);
+}
+
+.menu__btn-filter-text {
+	padding-top: 1px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: normal;
+	color: var(--fonts-primary, #25213b);
+	transition: all 0.3s ease-in-out;
+}
+
+.menu__btn-filter:hover .menu__btn-filter-text,
+.menu__btn-filter:focus-visible .menu__btn-filter-text {
+	color: var(--backgrounds-parent, #f2f0f9);
+}
+
+.menu__form {
+	position: relative;
+	flex-basis: 392px;
+	flex-shrink: 1.5;
+	height: 40px;
+}
+
+.menu__form-search {
+	width: 100%;
+	padding: 13px 10px 12px 40px;
+	font-size: 12px;
+	font-weight: 400;
+	color: var(--fonts-primary-variant, #6e6893);
+	border-radius: 6px;
+}
+
+.menu__form-search:focus {
+	outline-color: var(--primary, #6d5bd0);
+}
+
+.menu__form-btn {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	color: var(--fonts-primary-icon, #8b83ba);
+	transition: all 0.3s ease-in-out;
+}
+
+.menu__form-btn:hover,
+.menu__form-btn:focus-visible {
+	color: var(--fonts-stroke, #c6c2de);
+}
+
+.menu__form-btn:active {
+	color: var(--fonts-primary-variant, #6e6893);
+}
+
+@media (max-width: 680px) {
+	.menu {
+		flex-wrap: wrap;
+	}
+
+	.menu__form {
+		max-width: 280px;
+	}
+}
+
+@media (max-width: 600px) {
+	.menu__form {
+		max-width: 280px;
+	}
+}
+
+@media (max-width: 487px) {
+	.menu {
+		row-gap: 10px;
+	}
+}
+
+@media (max-width: 355px) {
+	.menu {
+		padding: 15px 6px;
+	}
+}
+

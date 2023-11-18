@@ -1,0 +1,24 @@
+.total-cost {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 5px;
+	/* padding: 0 28px; */
+	/* padding-bottom: 2px; */
+}
+
+.total-cost__description {
+	display: inline-block;
+	/* padding-top: 4px; */
+	font-size: 14px;
+	line-height: 17px;
+	text-transform: none;
+	color: var(--fonts-primary-variant, #6e6893);
+}
+
+.total-cost__price {
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 22px;
+	color: var(--primary, #6d5bd0);
+}
