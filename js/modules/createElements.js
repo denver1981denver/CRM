@@ -24,7 +24,7 @@ const createRow = data => {
       <td class="table__icon">
         <button class="table__btn-icon" type="button">
           <svg width="20" height="20">
-            <use xlink:href="#image"/>
+            <use xlink:href="#img"/>
           </svg>
         </button>
 
