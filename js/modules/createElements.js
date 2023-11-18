@@ -1,6 +1,6 @@
 
 // создание строки для таблицы
-const createRow = (data) => {
+const createRow = data => {
   const tr = document.createElement('tr');
   const {
     id,

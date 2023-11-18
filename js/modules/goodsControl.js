@@ -7,7 +7,7 @@ const removeItemGoods = id => {
   goods.filter(item => item.id !== id);
 };
 
-// загрузка изображения
+// функция вызова нового окна
 const getImg = url => {
   const width = (screenWidth - 600) / 2;
   const height = ((screenHeight - 600) / 2);
@@ -27,7 +27,7 @@ export const goodsControl = () => {
       recalcTotal(id, false);
       renderTableTotal();
     }
-
+// загрузка изображения
     if(target.closest('.table__btn-icon')) {
       const url = target.closest('tr').dataset.pic;
       getImg(url);
