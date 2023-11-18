@@ -1,11 +1,11 @@
 import {renderGoods} from './modules/render.js';
-import deleteControl from './modules/deleteControl.js';
+import goodsControl from './modules/goodsControl.js';
 import modalControl from './modules/modalControl.js';
 import {formControl} from './modules/formControl.js';
 
 const init = () => {
   renderGoods();
-  deleteControl();
+  goodsControl();
   const closeModal = modalControl();
   formControl(closeModal);
 };

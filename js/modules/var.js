@@ -10,6 +10,8 @@ const modalCount = document.querySelector('.modal__input-count');
 const tBody = document.querySelector('.table__body');
 const btnAddProduct = document.querySelector('.btn-add-product-cms');
 const modalOverlay = document.querySelector('.overlay');
+const screenWidth = screen.width;
+const screenHeight = screen.height;
 const totalAmount = {
   count: 0,
 };
@@ -26,4 +28,6 @@ export {
   btnAddProduct,
   modalOverlay,
   totalAmount,
+  screenWidth,
+  screenHeight
 };

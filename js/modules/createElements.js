@@ -11,7 +11,8 @@ const createRow = (data) => {
     price,
   } = data;
   const total = count * price;
-  tr.dataset.rowID = id;
+  tr.dataset.id = id;
+  tr.dataset.pic = '../../image/test.jpg';
   tr.insertAdjacentHTML('beforeend', `
       <td class="table__id">${id}</td>
       <td>${title}</td>
