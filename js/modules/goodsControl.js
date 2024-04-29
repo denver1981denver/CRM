@@ -28,7 +28,7 @@ export const goodsControl = () => {
       renderTableTotal();
     }
 // загрузка изображения
-    if(target.closest('.table__btn-icon')) {
+    if(target.closest('.table__btn-icon-img')) {
       const url = target.closest('tr').dataset.pic;
       getImg(url);
     }

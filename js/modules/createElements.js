@@ -22,7 +22,7 @@ const createRow = data => {
       <td class="table__price">${price}</td>
       <td class="table__total">${total}</td>
       <td class="table__icon">
-        <button class="table__btn-icon" type="button">
+        <button class="table__btn-icon table__btn-icon-img"" type="button">
           <svg width="20" height="20">
             <use xlink:href="#img"/>
           </svg>
