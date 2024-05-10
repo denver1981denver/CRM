@@ -1,6 +1,7 @@
-import goods from './goods.js';
-import {renderTableTotal, recalcTotal} from './render.js';
-import createRow from './createElements.js';
+import {fetchRequest} from './goods.js';
+import {recalcTotal, getDataError} from './render.js';
+
+import {createRow} from './createElements.js';
 import {
   modalForm as form,
   checkboxDiscount as checkbox,
@@ -11,28 +12,29 @@ import {
   tBody,
 } from './var.js';
 
-// создание рандомного идентификатора при добавлении товара пользователем
-const getId = () => {
-  // проверка ID на уникальность
-  const checkId = (data) => goods.find(item => item.id === data);
-
-  let result;
-  do {
-    result = Math.floor(Math.random() * (100000000 - 10000000) + 10000000);
-  } while (checkId());
-
-  result = '2' + result;
-  return +result;
-};
-
-// добавление объекта в базу данных и вывод базы в консоль
-const addDatabaseGoods = data => {
-  goods.push(data);
-};
-
 // рендеринг товара из формы
 const addGoodsPage = (contact) => {
   tBody.append(createRow(contact));
+};
+
+// идентификация нового товара из данных сервера
+const getNewProduct = (err, newGoods, goods) => {
+  if (err) {
+    console.warn(err);
+    return;
+  }
+
+  const newProduct = {};
+  newGoods.forEach(item => {
+    if (!goods.includes(item.id)) {
+      newProduct.item = item;
+      newProduct.price = item.price;
+      newProduct.count = item.count;
+    }
+  });
+
+  addGoodsPage(newProduct.item);
+  recalcTotal(newProduct.price, newProduct.count, true);
 };
 
 // вывод общей суммы в модальном окне
@@ -48,6 +50,19 @@ const getModalTotal = (price, count) => {
     }
     renderModalTotal(price * count);
   }
+};
+
+// загрузка нового товара на сервер и получение данных с сервера
+const uploadProductServer = async (newRow) => {
+  const goods = await fetchRequest(null, getDataError);
+  const responseStatusPost = await fetchRequest(null, getDataError, null, 'POST', newRow);
+
+  let responseStatus;
+  if (responseStatusPost) {
+    responseStatus = await fetchRequest(getNewProduct, getDataError, goods);
+  }
+
+  return responseStatus;
 };
 
 export const formControl = closeModal => {
@@ -76,13 +91,16 @@ export const formControl = closeModal => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const newRow = Object.fromEntries(formData);
-    newRow.id = getId();
-    addGoodsPage(newRow);
-    addDatabaseGoods(newRow);
-    recalcTotal(newRow.id, true);
-    renderTableTotal();
+
+    const responseStatus = async () => {
+      const result = await uploadProductServer(newRow);
+
+      if (result) {
+        closeModal();
+      }
+    };
+    responseStatus();
     form.reset();
-    closeModal();
   });
 };
 

@@ -10,6 +10,7 @@
 	cursor: default;
 }
 
+
 .modal__container {
 	padding: 32px 106px 39px;
 }
@@ -187,7 +188,7 @@
 
 .modal__btn-close {
 	position: absolute;
-	top: 18px;
+	top: 18px; 
 	right: 26px;
 }
 

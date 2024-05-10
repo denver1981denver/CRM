@@ -1,0 +1,46 @@
+.window-error {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: 0 auto;
+	width: 350px;
+	height: 350px;
+  transform: translate(-50%, -50%);
+	background-color: var(--backgrounds-parent);
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.window-error-on {
+	display: block;
+}
+
+.window-error__container {
+	position: relative;
+	padding-top: 109px;
+}
+
+.window-error__img {
+	background-image: url("../image/close.svg");
+	width: 94px;
+	height: 94px;
+	margin: 0 auto;
+	margin-bottom: 33px;
+}
+
+.window-error__message {
+	margin-left: -10px;
+	overflow: hidden;
+	white-space: pre-wrap;
+	font-weight: 700;
+	font-size: 18px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--fonts-primary-variant);
+}
+
+.window-error__btn-error {
+	position: absolute;
+	top: 26px;
+	right: 29px;
+}

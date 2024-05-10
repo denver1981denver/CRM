@@ -1,6 +1,32 @@
+import {modal} from './var.js';
+
+// создание окна с ошибкой
+export const createErrorWindow = dataErr => {
+  const windowError = document.createElement('div');
+  windowError.classList.add('window-error');
+  windowError.insertAdjacentHTML('beforeend', `
+    <div class="window-error__container">
+      div class="window-error__img"></div>
+        <p class="window-error__message">${dataErr}</p>
+
+      </div>
+
+      <button class="window-error__btn-error">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2L22 22" stroke="#6E6893" stroke-width="3" stroke-linecap="round"/>
+          <path d="M2 22L22 2" stroke="#6E6893" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </button>
+  `);
+  modal.append(windowError);
+  return {
+    windowError,
+    modal,
+  };
+};
 
 // создание строки для таблицы
-const createRow = data => {
+export const createRow = data => {
   const tr = document.createElement('tr');
   const {
     id,
@@ -45,4 +71,4 @@ const createRow = data => {
 
   return tr;
 };
-export default createRow;
+

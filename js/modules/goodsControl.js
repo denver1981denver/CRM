@@ -1,13 +1,32 @@
-import goods from './goods.js';
+import {fetchRequest} from './goods.js';
 import {tBody, screenWidth, screenHeight} from './var.js';
-import {renderTableTotal, recalcTotal} from './render.js';
+import {recalcTotal, getDataError} from './render.js';
 
-// удаление объекта из базы данных
-const removeItemGoods = id => {
-  goods.filter(item => item.id !== id);
+// получить стоимость удалённого товара
+const getCostDeletedProduct = (err, goods, id) => {
+  if (err) {
+    console.warn(err);
+    return;
+  }
+  let price;
+  let count;
+  goods.map((item) => {
+    if (item.id === id) {
+      price = item.price;
+      count = item.count;
+    }
+  });
+
+  recalcTotal(price, count, false);
 };
 
-// функция вызова нового окна
+// удаление товара на сервере
+const deleteProductServer = async (id) => {
+  await fetchRequest(getCostDeletedProduct, getDataError, id);
+  await fetchRequest(null, null, id, 'DELETE');
+};
+
+// функция вызова нового окна с изображением
 const getImg = url => {
   const width = (screenWidth - 600) / 2;
   const height = ((screenHeight - 600) / 2);
@@ -16,19 +35,18 @@ const getImg = url => {
   open(url, '', param);
 };
 
-export const goodsControl = () => {
+export const goodsControl = (goods) => {
   tBody.addEventListener('click', e => {
     const target = e.target;
-  // удаление строки с товаром в таблице
-    if(target.closest('.table__btn-icon-delete')) {
+    // удаление строки с товаром в таблице
+    if (target.closest('.table__btn-icon-delete')) {
       target.closest('tr').remove();
-      const id = +target.closest('tr').dataset.id;
-      removeItemGoods(id);
-      recalcTotal(id, false);
-      renderTableTotal();
+      const id = target.closest('tr').dataset.id;
+
+      deleteProductServer(id);
     }
-// загрузка изображения
-    if(target.closest('.table__btn-icon-img')) {
+    // загрузка изображения
+    if (target.closest('.table__btn-icon-img')) {
       const url = target.closest('tr').dataset.pic;
       getImg(url);
     }

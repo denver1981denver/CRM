@@ -1,5 +1,10 @@
 // const modalTitle = document.querySelector('.cms__title');
 // const modalID = document.querySelector('.modal__id');
+const URL = 'https://sable-rocky-centipede.glitch.me/api/goods';
+const headers = {
+  'Content-Type': 'application/json',
+};
+const modal = document.querySelector('.modal');
 const modalForm = document.querySelector('.modal__form');
 const checkboxDiscount = document.querySelector('.modal__input-checkbox');
 const inputDiscount = document.querySelector('.modal__input-discount');
@@ -17,6 +22,9 @@ const totalAmount = {
 };
 
 export {
+  URL,
+  headers,
+  modal,
   modalForm,
   checkboxDiscount,
   inputDiscount,
@@ -29,5 +37,5 @@ export {
   modalOverlay,
   totalAmount,
   screenWidth,
-  screenHeight
+  screenHeight,
 };
