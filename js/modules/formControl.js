@@ -1,75 +1,111 @@
-import {fetchRequest} from './goods.js';
+import fetchRequest from './goods.js';
 import {recalcTotal, getDataError} from './render.js';
-
 import {createRow} from './createElements.js';
-import {
-  modalForm as form,
-  checkboxDiscount as checkbox,
-  inputDiscount as discount,
-  modalTotal as total,
-  modalPrice as price,
-  modalCount as count,
-  tBody,
-} from './var.js';
+import {tBody} from './var.js';
 
 // рендеринг товара из формы
-const addGoodsPage = (contact) => {
+const addGoodsPage = contact => {
   tBody.append(createRow(contact));
 };
-
+// функция управления формой
+export const formControl = ({
+  checkbox,
+  form,
+  discount,
+  count,
+  price,
+  total,
+  overlay,
+}, id) => {
 // идентификация нового товара из данных сервера
-const getNewProduct = (err, newGoods, goods) => {
-  if (err) {
-    console.warn(err);
-    return;
-  }
-
-  const newProduct = {};
-  newGoods.forEach(item => {
-    if (!goods.includes(item.id)) {
-      newProduct.item = item;
-      newProduct.price = item.price;
-      newProduct.count = item.count;
+  const getNewProduct = (err, newGoods, goods) => {
+    if (err) {
+      return;
     }
-  });
 
-  addGoodsPage(newProduct.item);
-  recalcTotal(newProduct.price, newProduct.count, true);
-};
+    const newProduct = {};
+    newGoods.forEach(item => {
+      if (!goods.includes(item.id)) {
+        newProduct.item = item;
+        newProduct.price = item.price;
+        newProduct.count = item.count;
+      }
+    });
 
-// вывод общей суммы в модальном окне
-const renderModalTotal = sum => {
-  total.textContent = sum;
-};
+    addGoodsPage(newProduct.item);
+    recalcTotal(newProduct.price, newProduct.count, true);
+  };
 
-// общая сумма стоимости товаров в модальном окне
-const getModalTotal = (price, count) => {
-  if (!(count === '' && price === '')) {
-    if (count === '') {
-      count = 1;
+  // вывод общей суммы в модальном окне
+  const renderModalTotal = sum => {
+    total.textContent = sum;
+  };
+
+  // общая сумма стоимости товаров в модальном окне
+  const getModalTotal = (price, count) => {
+    if (!(count === '' && price === '')) {
+      if (count === '') {
+        count = 1;
+      }
+      renderModalTotal(price * count);
     }
-    renderModalTotal(price * count);
-  }
-};
+  };
+  // заполнение таблицы новым товаром данными с сервера
+  const edit = (err, goods, dataId) => {
+    if (err) {
+      return;
+    }
+    const {
+      category,
+      count,
+      price,
+      title,
+      units,
+    } = goods;
 
-// загрузка нового товара на сервер и получение данных с сервера
-const uploadProductServer = async (newRow) => {
-  const goods = await fetchRequest(null, getDataError);
-  const responseStatusPost = await fetchRequest(null, getDataError, null, 'POST', newRow);
+    const tr = document.body.querySelector(`[data-id="${dataId}"]`);
+    const tdElems = tr.querySelectorAll('td');
 
-  let responseStatus;
-  if (responseStatusPost) {
-    responseStatus = await fetchRequest(getNewProduct, getDataError, goods);
-  }
+    const arrayTd = Array.from(tdElems);
+    const oldPrice = +arrayTd[5].textContent;
+    const oldCount = +arrayTd[4].textContent;
 
-  return responseStatus;
-};
+    const total = count * price;
+    arrayTd[1].textContent = title;
+    arrayTd[2].textContent = category;
+    arrayTd[3].textContent = units;
+    arrayTd[4].textContent = count;
+    arrayTd[5].textContent = price;
+    arrayTd[6].textContent = total;
 
-export const formControl = closeModal => {
-// получение информации от полей, количество и цена в модальном окне
-  form.addEventListener('change', (e) => {
-    const target = e.target;
+    recalcTotal(oldPrice, oldCount);
+    recalcTotal(price, count, true);
+  };
+  // редактирование товара
+  const editProductServer = async (newRow, id) => {
+    const result = await fetchRequest(null, getDataError, id, null, 'PATCH', newRow);
 
+    if (result) {
+      const responseStatus = await fetchRequest(edit, getDataError, id);
+
+      return responseStatus;
+    }
+  };
+
+  // загрузка нового товара на сервер и получение данных с сервера
+  const uploadProductServer = async newRow => {
+    const goods = await fetchRequest(null, getDataError);
+    const responseStatusPost = await fetchRequest(null, getDataError, null, null, 'POST', newRow);
+
+    if (responseStatusPost) {
+      const responseStatus = await fetchRequest(getNewProduct, getDataError, null, goods);
+
+      return responseStatus;
+    }
+  };
+
+  // получение информации от полей, количество и цена в модальном окне
+  form.addEventListener('change', ({target}) => {
     if (target.closest('.modal__input-price') ||
     target.closest('.modal__input-count')) {
       getModalTotal(price.value, count.value);
@@ -93,11 +129,10 @@ export const formControl = closeModal => {
     const newRow = Object.fromEntries(formData);
 
     const responseStatus = async () => {
-      const result = await uploadProductServer(newRow);
+      const resultResponseStatus = (id) ? await editProductServer(newRow, id) :
+    await uploadProductServer(newRow);
 
-      if (result) {
-        closeModal();
-      }
+      if (resultResponseStatus) overlay.remove();
     };
     responseStatus();
     form.reset();

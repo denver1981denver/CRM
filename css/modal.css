@@ -10,7 +10,6 @@
 	cursor: default;
 }
 
-
 .modal__container {
 	padding: 32px 106px 39px;
 }
@@ -32,11 +31,16 @@
 
 .modal__id {
 	display: none;
+	align-self: center;
 	font-size: 10px;
 	font-weight: 600;
 	line-height: normal;
 	text-transform: uppercase;
 	color: var(--fonts-id, #c5c5c5);
+}
+
+.modal__id--open {
+	display: block;
 }
 
 .modal__product {

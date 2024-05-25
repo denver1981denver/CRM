@@ -1,16 +1,11 @@
-import {modalOverlay as overlay} from './var.js';
-
-export const errorWindowControl = (windowError, modal) => {
-  windowError.classList.add('window-error-on');
-
+// окно с ошибкой
+export const errorWindowControl = windowError => {
   const closeError = () => {
-    windowError.classList.remove('window-error-on');
+    windowError.remove();
   };
 
-  overlay.addEventListener('click', (e) => {
-    const target = e.target;
-
-    if (target === overlay || modal ||
+  document.body.addEventListener('click', ({target}) => {
+    if (target.closest('.overlay') || target.closest('.modal') ||
         target.closest('.window-error__btn-error')) {
       closeError();
     }

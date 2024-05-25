@@ -61,7 +61,7 @@ tr {
 }
 
 .overlay {
-	display: none;
+	display: flex;
 	position: fixed;
 	inset: 0;
 	overflow-y: auto;
@@ -75,9 +75,3 @@ tr {
 	transition-duration: 0.36s;
 	transition-timing-function: ease-in-out;
 }
-
-.overlay-on {
-	display: flex;
-}
-
-

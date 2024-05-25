@@ -1,4 +1,4 @@
-import {fetchRequest} from './goods.js';
+import fetchRequest from './goods.js';
 import {tBody, screenWidth, screenHeight} from './var.js';
 import {recalcTotal, getDataError} from './render.js';
 
@@ -10,7 +10,7 @@ const getCostDeletedProduct = (err, goods, id) => {
   }
   let price;
   let count;
-  goods.map((item) => {
+  goods.map(item => {
     if (item.id === id) {
       price = item.price;
       count = item.count;
@@ -21,9 +21,9 @@ const getCostDeletedProduct = (err, goods, id) => {
 };
 
 // удаление товара на сервере
-const deleteProductServer = async (id) => {
-  await fetchRequest(getCostDeletedProduct, getDataError, id);
-  await fetchRequest(null, null, id, 'DELETE');
+const deleteProductServer = async id => {
+  await fetchRequest(getCostDeletedProduct, getDataError, null, id);
+  await fetchRequest(null, getDataError, id, null, 'DELETE');
 };
 
 // функция вызова нового окна с изображением
@@ -35,9 +35,8 @@ const getImg = url => {
   open(url, '', param);
 };
 
-export const goodsControl = (goods) => {
-  tBody.addEventListener('click', e => {
-    const target = e.target;
+const goodsControl = () => {
+  tBody.addEventListener('click', ({target}) => {
     // удаление строки с товаром в таблице
     if (target.closest('.table__btn-icon-delete')) {
       target.closest('tr').remove();

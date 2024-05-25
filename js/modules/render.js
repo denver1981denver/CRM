@@ -22,7 +22,7 @@ export const recalcTotal = (price, count, key) => {
 };
 
 // вычисление общей стоимости товаров  в таблице
-export const getTableTotal = (goods) => {
+export const getTableTotal = goods => {
   total.count = goods.reduce((acc, item) =>
     acc + item.price * item.count, 0);
 
@@ -42,16 +42,17 @@ export const renderGoods = (err, goods) => {
 };
 
 // рендер окна с ошибкой
-const renderDataError = err => {
-  const {windowError, modal} = createErrorWindow(err);
-  errorWindowControl(windowError, modal);
+const renderDataError = async err => {
+  const windowError = await createErrorWindow(err);
+  errorWindowControl(windowError);
 };
+
 // получение данных ошибки
 export const getDataError = err => {
   if (err.name === 'TypeError') {
     err = 'Что-то пошло не так';
   }
-  
+
   renderDataError(err);
 };
 

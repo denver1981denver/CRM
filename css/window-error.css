@@ -1,18 +1,15 @@
 .window-error {
-	display: none;
+	display: block;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	margin: 0 auto;
 	width: 350px;
 	height: 350px;
-  transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 	background-color: var(--backgrounds-parent);
 	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
-}
-
-.window-error-on {
-	display: block;
+	z-index: 999;
 }
 
 .window-error__container {
@@ -29,7 +26,6 @@
 }
 
 .window-error__message {
-	margin-left: -10px;
 	overflow: hidden;
 	white-space: pre-wrap;
 	font-weight: 700;
@@ -37,6 +33,7 @@
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 	color: var(--fonts-primary-variant);
+	text-align: center;
 }
 
 .window-error__btn-error {

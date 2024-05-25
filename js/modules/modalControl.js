@@ -1,27 +1,41 @@
-import {btnAddProduct as btn, modalOverlay as overlay} from './var.js';
+import {createModal} from './createElements.js';
+import {formControl} from './formControl.js';
 
 // вызов модального окна
 const modalControl = () => {
-  btn.addEventListener('click', () => {
-    overlay.classList.add('overlay-on');
-  });
+  document.body.addEventListener('click', async ({target}) => {
+    const closeModal = overlay => {
+      overlay.remove();
+    };
 
-  // функция закрытия модального окна
-  const closeModal = () => {
-    overlay.classList.remove('overlay-on');
-  };
+    let modalElements;
 
-  // реализация закрытия модального окна
-  overlay.addEventListener('click', (e) => {
-    const target = e.target;
+    if (target.closest('.btn-add-product-cms')) {
+      modalElements = await createModal();
+      formControl(modalElements);
 
-    if (target === overlay ||
+      modalElements.overlay.addEventListener('click', ({target}) => {
+        if (target === modalElements.overlay ||
       target.closest('.modal__btn-close')) {
-      closeModal();
+          closeModal(modalElements.overlay);
+        }
+      });
+    }
+
+    if (target.closest('.table__btn-icon-edit')) {
+      const id = target.closest('tr').dataset.id;
+
+      modalElements = await createModal(id);
+      formControl(modalElements, id);
+
+      modalElements.overlay.addEventListener('click', ({target}) => {
+        if (target === modalElements.overlay ||
+      target.closest('.modal__btn-close')) {
+          closeModal(modalElements.overlay);
+        }
+      });
     }
   });
-
-  return closeModal;
 };
 
 export default modalControl;
