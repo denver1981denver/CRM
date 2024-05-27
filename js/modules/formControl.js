@@ -129,8 +129,9 @@ export const formControl = ({
     const newRow = Object.fromEntries(formData);
 
     const responseStatus = async () => {
+
       const resultResponseStatus = (id) ? await editProductServer(newRow, id) :
-    await uploadProductServer(newRow);
+      await uploadProductServer(newRow);
 
       if (resultResponseStatus) overlay.remove();
     };
