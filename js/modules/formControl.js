@@ -3,18 +3,36 @@ import {recalcTotal, getDataError} from './render.js';
 import {createRow} from './createElements.js';
 import {tBody} from './var.js';
 
+const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+
+  reader.addEventListener('loadend', () => {
+    resolve(reader.result);
+  });
+
+  reader.addEventListener('error', err => {
+    reject(err);
+  });
+
+  reader.readAsDataURL(file);
+});
+
 // рендеринг товара из формы
 const addGoodsPage = contact => {
   tBody.append(createRow(contact));
 };
 // функция управления формой
 export const formControl = ({
-  checkbox,
   form,
+  inputWrapper,
+  checkbox,
   discount,
   count,
   price,
   total,
+  file,
+  previewWrapper,
+  preview,
   overlay,
 }, id) => {
 // идентификация нового товара из данных сервера
@@ -55,6 +73,7 @@ export const formControl = ({
     if (err) {
       return;
     }
+
     const {
       category,
       count,
@@ -96,7 +115,6 @@ export const formControl = ({
   const uploadProductServer = async newRow => {
     const goods = await fetchRequest(null, getDataError);
     const responseStatusPost = await fetchRequest(null, getDataError, null, null, 'POST', newRow);
-
     if (responseStatusPost) {
       const responseStatus = await fetchRequest(getNewProduct, getDataError, null, goods);
 
@@ -109,6 +127,27 @@ export const formControl = ({
     if (target.closest('.modal__input-price') ||
     target.closest('.modal__input-count')) {
       getModalTotal(price.value, count.value);
+    }
+    // загрузка изображения в preview
+    if (target.closest('.modal__add-file')) {
+      if (file.files.length > 0) {
+        if (file.files[0].size <= 1000000) {
+          inputWrapper.classList.remove('error');
+          const src = URL.createObjectURL(file.files[0]);
+          previewWrapper.style.display = 'block';
+          preview.src = src;
+        }
+
+        if (file.files[0].size > 1000000) {
+          inputWrapper.classList.add('error');
+        }
+      }
+    }
+  });
+
+  document.addEventListener('click', ({target}) => {
+    if (target.closest('.modal__preview-remove')) {
+      previewWrapper.style.display = 'none';
     }
   });
 
@@ -123,19 +162,22 @@ export const formControl = ({
   });
 
   // добавление товара через форму
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
     const newRow = Object.fromEntries(formData);
+    newRow.image = await toBase64(newRow.image);
 
     const responseStatus = async () => {
-
       const resultResponseStatus = (id) ? await editProductServer(newRow, id) :
-      await uploadProductServer(newRow);
+    await uploadProductServer(newRow);
 
       if (resultResponseStatus) overlay.remove();
     };
+
     responseStatus();
+
     form.reset();
   });
 };

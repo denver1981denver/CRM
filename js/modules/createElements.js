@@ -94,6 +94,11 @@ export const createModal = async id => {
   const price = document.createElement('label');
   const modalPrice = document.createElement('input');
   const addFile = document.createElement('label');
+  const inputFile = document.createElement('input');
+  const previewWrapper = document.createElement('div');
+  const preview = document.createElement('img');
+  const previewRemove = document.createElement('button');
+  const errorImg = document.createElement('p');
   const total = document.createElement('div');
   const div = document.createElement('div');
   const modalTotal = document.createElement('span');
@@ -164,10 +169,25 @@ export const createModal = async id => {
   modalPrice.required = 'true';
   modalPrice.id = 'price';
   addFile.classList.add('modal__add-file');
+  inputFile.classList.add('modal__input', 'modal__input-file');
+  inputFile.type = 'file';
+  inputFile.accept = 'image/*';
+  inputFile.name = 'image';
   addFile.insertAdjacentHTML('beforeend', `
-    <input class="modal__input modal__input-file" type="file" accept="image/jpeg,image/png" multiple name="image">
     <span class="modal__input-file-text">Добавить изображение</span>
   `);
+  errorImg.classList.add('modal__error');
+  errorImg.textContent = 'Изображение не должно превышать размер 1 Мб';
+  previewWrapper.classList.add('modal__preview-wrapper');
+  preview.classList.add('modal__preview');
+  preview.height = '200';
+  previewRemove.insertAdjacentHTML('beforeend', `
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M23.5334 17.45L20 20.9833L16.45 17.45L14.1 19.8L17.65 23.3333L14.1167 26.8667L16.4667 29.2167L20 25.6833L23.5334 29.2167L25.8834 26.8667L22.35 23.3333L25.8834 19.8L23.5334 17.45ZM25.8334 6.66667L24.1667 5H15.8334L14.1667 6.66667H8.33337V10H31.6667V6.66667H25.8334ZM10 31.6667C10 33.5 11.5 35 13.3334 35H26.6667C28.5 35 30 33.5 30 31.6667V11.6667H10V31.6667ZM13.3334 15H26.6667V31.6667H13.3334V15Z"/>
+  </svg>
+ `);
+  previewRemove.type = 'button';
+  previewRemove.classList.add('modal__preview-remove');
   total.classList.add('total-cost');
   div.insertAdjacentHTML('beforeend', `
     <p class="total-cost__description">Итоговая стоимость:</p>
@@ -192,10 +212,12 @@ export const createModal = async id => {
   price.append(modalPrice);
   quantity.append(modalCount);
   label.append(inputDiscount);
-  inputWrapper.append(discount, description, quantity, price, addFile);
+  inputWrapper.append(discount, description, quantity, price, addFile, errorImg);
   discount.append(checkbox, label);
   heading.append(title, textID);
-  fieldset.append(inputWrapper);
+  addFile.append(inputFile);
+  previewWrapper.append(preview, previewRemove);
+  fieldset.append(inputWrapper, previewWrapper);
   form.append(fieldset, total);
   modalContainer.append(heading, form, close);
   modal.append(modalContainer);
@@ -204,11 +226,15 @@ export const createModal = async id => {
 
   return {
     form,
+    inputWrapper,
     discount: inputDiscount,
     checkbox,
     price: modalPrice,
     count: modalCount,
     total: modalTotal,
+    file: inputFile,
+    previewWrapper,
+    preview,
     overlay,
   };
 };

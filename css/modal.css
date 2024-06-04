@@ -58,10 +58,20 @@
 		"discount price"
 		"...      add-file";
 	gap: 12px 24px;
+	margin-bottom: 30px;
 	padding: 28px;
 	background-color: var(--backgrounds-primary, #fff);
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 	border-radius: 8px;
+}
+
+.error {
+	grid-template-areas:
+		"name     description"
+		"category description"
+		"units    quantity"
+		"discount price"
+		"error      add-file";
 }
 
 .modal__name {
@@ -103,6 +113,25 @@
 	grid-area: add-file;
 	position: relative;
 	align-self: end;
+}
+
+.modal__error {
+	grid-area: error;
+	display: none;
+	padding-bottom: 6px;
+	align-self: end;
+	font-weight: 700;
+	font-size: 14px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	text-align: center;
+	color: var(--error);
+	overflow: hidden;
+	white-space: pre-wrap;
+}
+
+.error .modal__error {
+	display: block;
 }
 
 .modal__input {
@@ -172,6 +201,7 @@
 	min-height: 39px;
 	padding: 11px 20px;
 	font-size: 14px;
+	font-weight: 600;
 	line-height: normal;
 	text-align: center;
 	text-transform: uppercase;
@@ -190,9 +220,55 @@
 	border-radius: 6px;
 }
 
+.modal__preview-wrapper {
+	position: relative;
+	width: 200px;
+	display: none;
+	margin: 0 auto;
+	background-color: transparent;
+}
+
+.modal__preview {
+	object-fit: cover;
+	object-position: center;
+	width: 200px;
+	height: 200px;
+	transition: all 0.5s linear;
+	background-color: transparent;
+}
+
+.modal__preview-remove {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 40px;
+	height: 40px;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.5s linear;
+	color: var(--backgrounds-primary, #fff);
+}
+
+.modal__preview-wrapper:hover .modal__preview {
+	filter: brightness(50%);
+	transition: all 0.3s linear;
+}
+
+.modal__preview-wrapper:hover .modal__preview-remove {
+	opacity: 1;
+	visibility: visible;
+	transition: all 0.3s linear;
+}
+
+.modal__preview-remove:hover {
+	color: #ffffff98;
+	transition: all 0.3s linear;
+}
+
 .modal__btn-close {
 	position: absolute;
-	top: 18px; 
+	top: 18px;
 	right: 26px;
 }
 
