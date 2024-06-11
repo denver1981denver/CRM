@@ -122,17 +122,17 @@ export const createModal = async id => {
   inputWrapper.insertAdjacentHTML('beforeend', `
     <label class="modal__name">
     <span class="modal__input-text">Наименование</span>
-    <input class="modal__input" type="text" name ="title" required>
+    <input id="title" class="modal__input" type="text" name ="title" required>
     </label>
 
     <label class="modal__category">
     <span class="modal__input-text">Категория</span>  
-    <input class="modal__input" type="text" name="category" required>
+    <input id="category" class="modal__input" type="text" name="category" required>
     </label>
 
     <label class="modal__units">
     <span class="modal__input-text">Единицы измерения</span>
-    <input class="modal__input" type="text" name="units" required>
+    <input id="units" class="modal__input" type="text" name="units" required>
     </label>    
   `);
   discount.classList.add('modal__discount');
@@ -143,13 +143,13 @@ export const createModal = async id => {
     <span class="modal__input-text">Дисконт</span>                
   `);
   inputDiscount.classList.add('modal__input-discount');
-  inputDiscount.type = 'text';
+  inputDiscount.type = 'number';
   inputDiscount.name = 'discount';
   inputDiscount.disabled = 'true';
   description.classList.add('modal__description');
   description.insertAdjacentHTML('beforeend', `
     <span class="modal__input-text">Описание</span>
-    <textarea class="modal__input modal__textarea" name="description" required></textarea>
+    <textarea class="modal__input modal__textarea" name="description" minlength="80" required></textarea>
   `);
   quantity.classList.add('modal__label', 'modal__quantity');
   quantity.insertAdjacentHTML('beforeend', `

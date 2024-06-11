@@ -92,6 +92,17 @@
 	margin-left: auto;
 }
 
+.modal__input-discount::-webkit-outer-spin-button,
+.modal__input-discount::-webkit-inner-spin-button {
+	-webkit-appearance: none; 
+}
+.modal__input-discount,
+.modal__input-discount:hover,
+.modal__input-discount:focus {
+	appearance: none;
+	-moz-appearance: textfield;
+}
+
 .modal__discount {
 	position: relative;
 	grid-area: discount;
@@ -113,6 +124,7 @@
 	grid-area: add-file;
 	position: relative;
 	align-self: end;
+	cursor: pointer;
 }
 
 .modal__error {

@@ -1,8 +1,15 @@
 import fetchRequest from './goods.js';
 import {recalcTotal, getDataError} from './render.js';
 import {createRow} from './createElements.js';
-import {tBody} from './var.js';
+import {tBody, inputValid, unitValid} from './var.js';
+// валидациz инпутов
+const checkValidInput = (dataInput, checkUnit) => {
+  let regexp = inputValid;
+  if (checkUnit) regexp = unitValid;
 
+  dataInput.value = dataInput.value.replace(regexp, '');
+};
+// преобразование изображений в 64 разряд
 const toBase64 = file => new Promise((resolve, reject) => {
   const reader = new FileReader();
 
@@ -16,7 +23,6 @@ const toBase64 = file => new Promise((resolve, reject) => {
 
   reader.readAsDataURL(file);
 });
-
 // рендеринг товара из формы
 const addGoodsPage = contact => {
   tBody.append(createRow(contact));
@@ -40,7 +46,6 @@ export const formControl = ({
     if (err) {
       return;
     }
-
     const newProduct = {};
     newGoods.forEach(item => {
       if (!goods.includes(item.id)) {
@@ -53,12 +58,10 @@ export const formControl = ({
     addGoodsPage(newProduct.item);
     recalcTotal(newProduct.price, newProduct.count, true);
   };
-
   // вывод общей суммы в модальном окне
   const renderModalTotal = sum => {
     total.textContent = sum;
   };
-
   // общая сумма стоимости товаров в модальном окне
   const getModalTotal = (price, count) => {
     if (!(count === '' && price === '')) {
@@ -73,7 +76,6 @@ export const formControl = ({
     if (err) {
       return;
     }
-
     const {
       category,
       count,
@@ -84,11 +86,9 @@ export const formControl = ({
 
     const tr = document.body.querySelector(`[data-id="${dataId}"]`);
     const tdElems = tr.querySelectorAll('td');
-
     const arrayTd = Array.from(tdElems);
     const oldPrice = +arrayTd[5].textContent;
     const oldCount = +arrayTd[4].textContent;
-
     const total = count * price;
     arrayTd[1].textContent = title;
     arrayTd[2].textContent = category;
@@ -103,14 +103,12 @@ export const formControl = ({
   // редактирование товара
   const editProductServer = async (newRow, id) => {
     const result = await fetchRequest(null, getDataError, id, null, 'PATCH', newRow);
-
     if (result) {
       const responseStatus = await fetchRequest(edit, getDataError, id);
 
       return responseStatus;
     }
   };
-
   // загрузка нового товара на сервер и получение данных с сервера
   const uploadProductServer = async newRow => {
     const goods = await fetchRequest(null, getDataError);
@@ -121,7 +119,6 @@ export const formControl = ({
       return responseStatus;
     }
   };
-
   // получение информации от полей, количество и цена в модальном окне
   form.addEventListener('change', ({target}) => {
     if (target.closest('.modal__input-price') ||
@@ -137,20 +134,17 @@ export const formControl = ({
           previewWrapper.style.display = 'block';
           preview.src = src;
         }
-
         if (file.files[0].size > 1000000) {
           inputWrapper.classList.add('error');
         }
       }
     }
   });
-
   document.addEventListener('click', ({target}) => {
     if (target.closest('.modal__preview-remove')) {
       previewWrapper.style.display = 'none';
     }
   });
-
   // переключение чекбокса для  поля Дисконт
   checkbox.addEventListener('click', () => {
     if (checkbox.checked) {
@@ -160,24 +154,30 @@ export const formControl = ({
       discount.disabled = 1;
     }
   });
+  // получение данных для валидации инпутов
+  form.addEventListener('input', ({target}) => {
+    const title = target.closest('#title');
+    const category = target.closest('#category');
+    const description = target.closest('.modal__textarea');
+    const units = target.closest('#units');
 
+    if (title) checkValidInput(title);
+    if (category) checkValidInput(category);
+    if (description) checkValidInput(description);
+    if (units) checkValidInput(units, 'letters');
+  });
   // добавление товара через форму
   form.addEventListener('submit', async e => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const newRow = Object.fromEntries(formData);
     newRow.image = await toBase64(newRow.image);
-
     const responseStatus = async () => {
       const resultResponseStatus = (id) ? await editProductServer(newRow, id) :
     await uploadProductServer(newRow);
-
       if (resultResponseStatus) overlay.remove();
     };
-
     responseStatus();
-
     form.reset();
   });
 };
