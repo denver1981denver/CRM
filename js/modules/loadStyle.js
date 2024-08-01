@@ -1,5 +1,6 @@
 import {styles} from './var.js';
-// загрузка стилей для модалки
+
+// загрузка стилей для модального окна
 const loadStyle = url => {
   if (styles.has(url)) {
     return styles.get(url);
@@ -15,7 +16,6 @@ const loadStyle = url => {
 
     document.head.append(link);
   });
-
   styles.set(url, stylePromise);
 
   return stylePromise;

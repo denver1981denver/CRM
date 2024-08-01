@@ -1,34 +1,12 @@
-import fetchRequest from './goods.js';
-import {recalcTotal, getDataError} from './render.js';
-import {createRow} from './createElements.js';
-import {tBody, inputValid, unitValid} from './var.js';
-// валидациz инпутов
-const checkValidInput = (dataInput, checkUnit) => {
-  let regexp = inputValid;
-  if (checkUnit) regexp = unitValid;
+import fetchRequest from './fetchRequest.js';
+import {getDataError} from './render.js';
+import {URLImage, globalCounter as counter} from './var.js';
+import {calcDiscount, checkValidInput, toBase64} from './plugins.js';
+import uploadProductServer from './addNewProduct.js';
+import editProductServer from './editProduct.js';
 
-  dataInput.value = dataInput.value.replace(regexp, '');
-};
-// преобразование изображений в 64 разряд
-const toBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-
-  reader.addEventListener('loadend', () => {
-    resolve(reader.result);
-  });
-
-  reader.addEventListener('error', err => {
-    reject(err);
-  });
-
-  reader.readAsDataURL(file);
-});
-// рендеринг товара из формы
-const addGoodsPage = contact => {
-  tBody.append(createRow(contact));
-};
 // функция управления формой
-export const formControl = ({
+export const formControl = async ({
   form,
   inputWrapper,
   checkbox,
@@ -37,94 +15,40 @@ export const formControl = ({
   price,
   total,
   file,
+  title,
+  category,
+  units,
+  textarea,
   previewWrapper,
   preview,
   overlay,
-}, id) => {
-// идентификация нового товара из данных сервера
-  const getNewProduct = (err, newGoods, goods) => {
-    if (err) {
-      return;
-    }
-    const newProduct = {};
-    newGoods.forEach(item => {
-      if (!goods.includes(item.id)) {
-        newProduct.item = item;
-        newProduct.price = item.price;
-        newProduct.count = item.count;
-      }
-    });
+}, id, editTr) => {
 
-    addGoodsPage(newProduct.item);
-    recalcTotal(newProduct.price, newProduct.count, true);
-  };
   // вывод общей суммы в модальном окне
-  const renderModalTotal = sum => {
-    total.textContent = sum;
+  const renderModalTotal = () => {
+    if (discount.value > 100) discount.value = 100;
+    const result = calcDiscount(price.value, count.value, discount.value);
+    total.textContent = result;
   };
-  // общая сумма стоимости товаров в модальном окне
+
+  // калькуляция значений при расчёте стоимости товара
   const getModalTotal = (price, count) => {
+    if (price === '') total.textContent = '0';
     if (!(count === '' && price === '')) {
       if (count === '') {
         count = 1;
       }
-      renderModalTotal(price * count);
+      renderModalTotal();
     }
   };
-  // заполнение таблицы новым товаром данными с сервера
-  const edit = (err, goods, dataId) => {
-    if (err) {
-      return;
-    }
-    const {
-      category,
-      count,
-      price,
-      title,
-      units,
-    } = goods;
 
-    const tr = document.body.querySelector(`[data-id="${dataId}"]`);
-    const tdElems = tr.querySelectorAll('td');
-    const arrayTd = Array.from(tdElems);
-    const oldPrice = +arrayTd[5].textContent;
-    const oldCount = +arrayTd[4].textContent;
-    const total = count * price;
-    arrayTd[1].textContent = title;
-    arrayTd[2].textContent = category;
-    arrayTd[3].textContent = units;
-    arrayTd[4].textContent = count;
-    arrayTd[5].textContent = price;
-    arrayTd[6].textContent = total;
-
-    recalcTotal(oldPrice, oldCount);
-    recalcTotal(price, count, true);
-  };
-  // редактирование товара
-  const editProductServer = async (newRow, id) => {
-    const result = await fetchRequest(null, getDataError, id, null, 'PATCH', newRow);
-    if (result) {
-      const responseStatus = await fetchRequest(edit, getDataError, id);
-
-      return responseStatus;
-    }
-  };
-  // загрузка нового товара на сервер и получение данных с сервера
-  const uploadProductServer = async newRow => {
-    const goods = await fetchRequest(null, getDataError);
-    const responseStatusPost = await fetchRequest(null, getDataError, null, null, 'POST', newRow);
-    if (responseStatusPost) {
-      const responseStatus = await fetchRequest(getNewProduct, getDataError, null, goods);
-
-      return responseStatus;
-    }
-  };
   // получение информации от полей, количество и цена в модальном окне
-  form.addEventListener('change', ({target}) => {
+  form.addEventListener('input', ({target}) => {
     if (target.closest('.modal__input-price') ||
     target.closest('.modal__input-count')) {
       getModalTotal(price.value, count.value);
     }
+
     // загрузка изображения в preview
     if (target.closest('.modal__add-file')) {
       if (file.files.length > 0) {
@@ -140,11 +64,14 @@ export const formControl = ({
       }
     }
   });
+
+  // удаление загруженного изображения
   document.addEventListener('click', ({target}) => {
     if (target.closest('.modal__preview-remove')) {
       previewWrapper.style.display = 'none';
     }
   });
+
   // переключение чекбокса для  поля Дисконт
   checkbox.addEventListener('click', () => {
     if (checkbox.checked) {
@@ -152,20 +79,53 @@ export const formControl = ({
     } else {
       discount.value = '';
       discount.disabled = 1;
+      renderModalTotal();
     }
   });
+
+  discount.addEventListener('input', () => {
+    renderModalTotal();
+  });
+
   // получение данных для валидации инпутов
   form.addEventListener('input', ({target}) => {
-    const title = target.closest('#title');
-    const category = target.closest('#category');
-    const description = target.closest('.modal__textarea');
-    const units = target.closest('#units');
-
-    if (title) checkValidInput(title);
-    if (category) checkValidInput(category);
-    if (description) checkValidInput(description);
-    if (units) checkValidInput(units, 'letters');
+    if (target === title) checkValidInput(title);
+    if (target === category) checkValidInput(category);
+    if (target === textarea) checkValidInput(textarea);
+    if (target === units) checkValidInput(units, 'letters');
+    if (target === count) checkValidInput(count, 'numbers');
+    if (target === price) checkValidInput(price, 'numbers');
+    if (target === discount) checkValidInput(discount, 'numbers', true);
   });
+
+  // загрузка данных редактируемого продукта с сервера в модальное окно
+  const getEditProduct = async () => {
+    const editProduct = await fetchRequest(null, {getDataError, id});
+    title.value = editProduct.title;
+    category.value = editProduct.category;
+    units.value = editProduct.units;
+    textarea.value = editProduct.description;
+    price.value = editProduct.price;
+    count.value = editProduct.count;
+    const totalProduct = calcDiscount(editProduct.price, editProduct.count, editProduct.discount);
+    total.textContent = totalProduct;
+
+    if (editProduct.discount > 0) {
+      discount.value = editProduct.discount;
+    }
+
+    if (editProduct.image !== 'image/notimage.jpg') {
+      previewWrapper.style.display = 'block';
+      preview.src = `${URLImage}${editProduct.image}`;
+    }
+
+    return totalProduct;
+  };
+  // сохранение цены до редактирования
+  if (id) {
+    counter.amountSaved = await getEditProduct();
+  }
+
   // добавление товара через форму
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -173,8 +133,8 @@ export const formControl = ({
     const newRow = Object.fromEntries(formData);
     newRow.image = await toBase64(newRow.image);
     const responseStatus = async () => {
-      const resultResponseStatus = (id) ? await editProductServer(newRow, id) :
-    await uploadProductServer(newRow);
+      const resultResponseStatus = (id) ? await editProductServer(newRow, id, editTr) :
+      await uploadProductServer(newRow);
       if (resultResponseStatus) overlay.remove();
     };
     responseStatus();

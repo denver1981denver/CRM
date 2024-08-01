@@ -1,0 +1,37 @@
+.modal-delete {
+  margin: auto;
+	text-transform: uppercase;
+  padding: 20px;
+  background-color: var(--backgrounds-parent, #f2f0f9);
+	color: var(--fonts-primary-variant, #6e6893);
+	box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.modal-delete__title {
+  font-weight: 700;
+	font-size: 24px;
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.modal-delete__btn-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.modal-delete__btn {
+  background-color: var(--primary);
+  color: var(--backgrounds-primary);
+	font-size: 16px;
+padding: 10px 15px;
+font-weight: 600;
+  transition: all .5s linear;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.modal-delete__btn:hover {
+  background-color: var(--error);
+  transition: all .3s linear;
+}
