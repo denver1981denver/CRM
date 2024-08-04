@@ -26,7 +26,7 @@ export const createModalDelete = async () => {
   modalDel.append(wrapper);
   overlay.append(modalDel);
   document.body.append(overlay);
-
+  document.body.classList.add('body-popap');
   return {overlay, btnDelete, btnCancel};
 };
 
@@ -152,11 +152,11 @@ export const createModal = async (id, categories) => {
   const form = document.createElement('form');
   const fieldset = document.createElement('fieldset');
   const inputWrapper = document.createElement('div');
-  const modalName = document.createElement('label');
+  const name = document.createElement('label');
   const inputName = document.createElement('input');
-  const modalCategory = document.createElement('label');
+  const category = document.createElement('label');
   const inputCategory = document.createElement('input');
-  const modalUnits = document.createElement('label');
+  const units = document.createElement('label');
   const inputUnits = document.createElement('input');
   const datalist = document.createElement('datalist');
   const discount = document.createElement('div');
@@ -175,9 +175,9 @@ export const createModal = async (id, categories) => {
   const preview = document.createElement('img');
   const previewRemove = document.createElement('button');
   const errorImg = document.createElement('p');
-  const total = document.createElement('div');
-  const div = document.createElement('div');
-  const modalTotal = document.createElement('span');
+  const modalFooter = document.createElement('div');
+  const totalWrapper = document.createElement('div');
+  const totalPrice = document.createElement('span');
   const btnAddProduct = document.createElement('button');
   const close = document.createElement('button');
 
@@ -195,26 +195,29 @@ export const createModal = async (id, categories) => {
   form.classList.add('modal__form');
   fieldset.classList.add('modal__product');
   inputWrapper.classList.add('modal__input-wrapper');
-  modalName.insertAdjacentHTML('beforeend',`
+  name.className = 'modal__name';
+  name.insertAdjacentHTML('beforeend',`
     <span class="modal__input-text">Наименование</span>
   `,);
-  inputName.classList = 'modal__input';
+  inputName.classList = 'modal__input modal__input-name';
   inputName.type = 'text';
   inputName.name = 'title';
   inputName.required = 'on';
-  modalCategory.insertAdjacentHTML('beforeend',`
+  category.className = 'modal__category';
+  category.insertAdjacentHTML('beforeend',`
     <span class="modal__input-text">Категория</span>  
   `,);
-  inputCategory.classList = 'modal__input';
+  inputCategory.className = 'modal__input';
   inputCategory.type = 'text';
   inputCategory.name = 'category';
   inputCategory.setAttribute('list', 'category-list');
   inputCategory.autocomplete = 'off';
   inputCategory.required = 'on';
-  modalUnits.insertAdjacentHTML('beforeend',`
+  units.className = 'modal__units'
+  units.insertAdjacentHTML('beforeend',`
     <span class="modal__input-text">Единицы измерения</span>
   `);
-  inputUnits.classList = 'modal__input';
+  inputUnits.className = 'modal__input';
   inputUnits.type = 'text';
   inputUnits.name = 'units';
   inputUnits.required = 'on';
@@ -251,6 +254,7 @@ export const createModal = async (id, categories) => {
   modalCount.name = 'count';
   modalCount.required = 'true';
   modalCount.min = '1';
+  modalCount.value = '1';
   price.classList.add('modal__label', 'modal__price');
   price.insertAdjacentHTML('beforeend',`
     <span class="modal__input-text">Цена</span>
@@ -281,16 +285,17 @@ export const createModal = async (id, categories) => {
   `);
   previewRemove.type = 'button';
   previewRemove.classList.add('modal__preview-remove');
-  total.classList.add('total-cost');
-  div.insertAdjacentHTML('beforeend',`
-    <p class="total-cost__description">Итоговая стоимость:</p>
-    <span class="total-cost__price">&#36;</span>
+  modalFooter.classList.add('amount-goods');
+  totalWrapper.className = 'amount-goods__wrapper';
+  totalWrapper.insertAdjacentHTML('beforeend',`
+    <p class="amount-goods__description">Итоговая стоимость:</p>
+    <span class="amount-goods__price">&#36;</span>
   `);
-  modalTotal.classList.add('total-cost__price', 'total-cost__price-modal');
-  modalTotal.textContent = '0';
+  totalPrice.classList.add('amount-goods__price');
+  totalPrice.textContent = '0';
   btnAddProduct.classList.add('btn-add-product', 'btn-add-product-modal');
   btnAddProduct.type = 'submit';
-  btnAddProduct.textContent = 'Добавить товар';
+  btnAddProduct.textContent = id ? 'Изменить товар' : 'Добавить ТОВАР'
   close.classList.add('modal__btn-close');
   close.type = 'button';
   close.insertAdjacentHTML('beforeend',`
@@ -300,20 +305,20 @@ export const createModal = async (id, categories) => {
     </svg>
   `);
 
-  modalName.append(inputName);
-  modalCategory.append(inputCategory);
-  modalUnits.append(inputUnits);
+  name.append(inputName);
+  category.append(inputCategory);
+  units.append(inputUnits);
   description.append(textarea);
-  div.append(modalTotal);
-  total.append(div, btnAddProduct);
+  totalWrapper.append(totalPrice);
+  modalFooter.append(totalWrapper, btnAddProduct);
   price.append(modalPrice);
   quantity.append(modalCount);
   wrapperDiscount.append(inputDiscount);
   inputWrapper.append(
-    modalName,
-    modalCategory,
+    name,
+    category,
     datalist,
-    modalUnits,
+    units,
     discount,
     description,
     quantity,
@@ -326,12 +331,12 @@ export const createModal = async (id, categories) => {
   addFile.append(inputFile);
   previewWrapper.append(preview, previewRemove);
   fieldset.append(inputWrapper, previewWrapper);
-  form.append(fieldset, total);
+  form.append(fieldset, modalFooter);
   modalContainer.append(heading, form, close);
   modal.append(modalContainer);
   overlay.append(modal);
   document.body.append(overlay);
-
+  document.body.classList.add('body-popap');
   return {
     form,
     inputWrapper,
@@ -339,7 +344,7 @@ export const createModal = async (id, categories) => {
     checkbox,
     price: modalPrice,
     count: modalCount,
-    total: modalTotal,
+    total: totalPrice,
     file: inputFile,
     title: inputName,
     category: inputCategory,

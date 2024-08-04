@@ -30,7 +30,6 @@ img {
 	display: block;
 }
 
-
 img,
 svg {
 	width: 100%;
@@ -74,6 +73,7 @@ tr {
 	display: flex;
 	position: fixed;
 	inset: 0;
+	padding: 0 20px;
 	overflow-y: auto;
 	overflow-x: hidden;
 	text-align: center;
@@ -84,4 +84,14 @@ tr {
 	transition-property: opacity, visibility;
 	transition-duration: 0.36s;
 	transition-timing-function: ease-in-out;
+}
+
+.body-popap {
+	overflow: hidden;
+}
+
+@media (max-width: 386px) {
+	.overlay {
+		padding: 0 10px;
+	}
 }

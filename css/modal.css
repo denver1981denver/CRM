@@ -1,5 +1,9 @@
 .modal {
 	position: relative;
+	display: flex;
+	width: 792px;
+	padding-top: 32px;
+	padding-bottom: 39px;
 	margin: auto;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -11,7 +15,7 @@
 }
 
 .modal__container {
-	padding: 32px 106px 39px;
+	margin: 0 auto;
 }
 
 .modal__heading-wrapper {
@@ -56,22 +60,12 @@
 		"category description"
 		"units    quantity"
 		"discount price"
-		"...      add-file";
+		"error      add-file";
 	gap: 12px 24px;
-	margin-bottom: 30px;
 	padding: 28px;
 	background-color: var(--backgrounds-primary, #fff);
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 	border-radius: 8px;
-}
-
-.error {
-	grid-template-areas:
-		"name     description"
-		"category description"
-		"units    quantity"
-		"discount price"
-		"error      add-file";
 }
 
 .modal__name {
@@ -94,7 +88,7 @@
 
 .modal__input-discount::-webkit-outer-spin-button,
 .modal__input-discount::-webkit-inner-spin-button {
-	-webkit-appearance: none; 
+	-webkit-appearance: none;
 }
 .modal__input-discount,
 .modal__input-discount:hover,
@@ -223,6 +217,44 @@
 	border-radius: 6px;
 }
 
+.amount-goods {
+	max-width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 10px;
+	column-gap: 5px;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 0 28px;
+}
+
+.amount-goods__wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 60%;
+	align-items: center;
+	padding-top: 3px;
+}
+
+.amount-goods__description {
+	display: inline-block;
+	padding-right: 5px;
+	font-size: 14px;
+	line-height: 17px;
+	text-transform: none;
+	color: var(--fonts-primary-variant, #6e6893);
+}
+
+.amount-goods__price {
+	display: inline-block;
+	max-width: 147px;
+	margin-right: 6px;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 22px;
+	color: var(--primary, #6d5bd0);
+}
+
 .modal__btn-add-product {
 	min-width: 200px;
 	padding: 10px 25px;
@@ -238,6 +270,7 @@
 	width: 200px;
 	display: none;
 	margin: 0 auto;
+	padding-top: 30px;
 	background-color: transparent;
 }
 
@@ -275,7 +308,7 @@
 }
 
 .modal__preview-remove:hover {
-	color: #ffffff98;
+	color: var(--preview-remove);
 	transition: all 0.3s linear;
 }
 
@@ -285,7 +318,7 @@
 	right: 26px;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 700px) {
 	.modal__container {
 		padding-right: 5vw;
 		padding-left: 5vw;
@@ -295,11 +328,21 @@
 		grid-template-columns: repeat(2, 1fr);
 		gap: 10px 10px;
 	}
+
+	.modal__container {
+		width: 100%;
+	}
+
+	.amount-goods {
+		flex-direction: column;
+		padding: 0 5px;
+		gap: 20px;
+	}
 }
 
-@media (max-width: 580px) {
+@media (max-width: 585px) {
 	.modal__input-wrapper {
-		grid-template-columns: repeat(1fr);
+		grid-template-columns: repeat(1, 1fr);
 		grid-template-rows: repeat(9, 60px);
 		grid-template-areas:
 			"name "
@@ -310,25 +353,55 @@
 			"description"
 			"quantity"
 			"price"
-			"add-file";
+			"add-file"
+			"error";
 	}
 
-	.modal__wrapper-cost {
-		display: flex;
-		flex-direction: column;
-		align-items: start;
-		justify-content: space-between;
-		gap: 15px;
+	.modal__discount,
+	.modal__input {
+		width: 250px;
 	}
 
-	.modal__container {
-		padding-right: 10px;
-		padding-left: 10px;
-		max-width: 350px;
+	.modal__textarea,
+	.modal__input-name {
+		width: 100%;
+	}
+
+	.modal__add-file {
+		max-width: 250px;
+	}
+
+	.modal__error {
+		text-align: left;
+	}
+
+	.amount-goods__wrapper {
+		max-width: 80%;
 	}
 }
 
-@media (max-width: 350px) {
+@media (max-width: 362px) {
+	.modal {
+		padding-top: 10px;
+	}
+	.modal__title {
+		font-size: 18px;
+	}
+
+	.modal__input-wrapper {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.modal__discount,
+	.modal__input {
+		width: 100%;
+	}
+
+	.modal__input-file-text {
+		font-size: 12px;
+	}
+
 	.modal__btn-close {
 		top: 10px;
 		right: 20px;

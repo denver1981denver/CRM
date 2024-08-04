@@ -1,5 +1,6 @@
 .menu {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: flex-start;
 	justify-content: flex-start;
 	gap: 20px;
@@ -10,6 +11,7 @@
 
 .menu__btn-filter {
 	display: flex;
+	flex-shrink: 0;
 	width: 108px;
 	height: 40px;
 	gap: 10px;
@@ -89,31 +91,25 @@
 	color: var(--fonts-primary-variant, #6e6893);
 }
 
-@media (max-width: 680px) {
+@media (max-width: 800px) {
 	.menu {
-		flex-wrap: wrap;
-	}
-
-	.menu__form {
-		max-width: 280px;
+		justify-content: space-between;
 	}
 }
 
-@media (max-width: 600px) {
-	.menu__form {
-		max-width: 280px;
-	}
-}
-
-@media (max-width: 487px) {
+@media (max-width: 599px) {
 	.menu {
-		row-gap: 10px;
+		padding-bottom: 30px;
+	}
+
+	.menu__form-search {
+		font-size: 16px;
 	}
 }
 
-@media (max-width: 355px) {
+@media (max-width: 422px) {
 	.menu {
-		padding: 15px 6px;
+		text-overflow: hidden;
+		text-overflow: ellipsis;
 	}
 }
-

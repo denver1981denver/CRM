@@ -1,6 +1,6 @@
 import fetchRequest from './fetchRequest.js';
 import {getDataError} from './render.js';
-import {URLImage, globalCounter as counter} from './var.js';
+import {URLImage, globalCounter as counter, imgDataServer as imgData} from './var.js';
 import {calcDiscount, checkValidInput, toBase64} from './plugins.js';
 import uploadProductServer from './addNewProduct.js';
 import editProductServer from './editProduct.js';
@@ -27,6 +27,7 @@ export const formControl = async ({
   // вывод общей суммы в модальном окне
   const renderModalTotal = () => {
     if (discount.value > 100) discount.value = 100;
+    if (count.value < 1) count.value = 1;
     const result = calcDiscount(price.value, count.value, discount.value);
     total.textContent = result;
   };
@@ -38,6 +39,7 @@ export const formControl = async ({
       if (count === '') {
         count = 1;
       }
+
       renderModalTotal();
     }
   };
@@ -69,6 +71,9 @@ export const formControl = async ({
   document.addEventListener('click', ({target}) => {
     if (target.closest('.modal__preview-remove')) {
       previewWrapper.style.display = 'none';
+      console.log(file.value);
+      file.value = '';
+      imgData.saveDataImg = null;
     }
   });
 
@@ -109,7 +114,7 @@ export const formControl = async ({
     count.value = editProduct.count;
     const totalProduct = calcDiscount(editProduct.price, editProduct.count, editProduct.discount);
     total.textContent = totalProduct;
-
+  
     if (editProduct.discount > 0) {
       discount.value = editProduct.discount;
     }
@@ -117,21 +122,21 @@ export const formControl = async ({
     if (editProduct.image !== 'image/notimage.jpg') {
       previewWrapper.style.display = 'block';
       preview.src = `${URLImage}${editProduct.image}`;
+      imgData.saveDataImg = editProduct.image;
     }
 
     return totalProduct;
   };
   // сохранение цены до редактирования
-  if (id) {
-    counter.amountSaved = await getEditProduct();
-  }
-
+  if (id) counter.amountSaved = await getEditProduct();
+ 
   // добавление товара через форму
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const newRow = Object.fromEntries(formData);
     newRow.image = await toBase64(newRow.image);
+    if(id && imgData.saveDataImg) newRow.image = imgData.saveDataImg;
     const responseStatus = async () => {
       const resultResponseStatus = (id) ? await editProductServer(newRow, id, editTr) :
       await uploadProductServer(newRow);

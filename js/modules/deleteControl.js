@@ -19,6 +19,7 @@ const deleteControl = () => {
 
     overlay.addEventListener('click', ({target}) => {
       if (target === overlay) closeModal();
+      document.body.classList.remove('body-popap');
     });
 
     btnDelete.addEventListener('click', () => {

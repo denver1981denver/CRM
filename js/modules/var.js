@@ -1,7 +1,7 @@
 const URL = 'https://sable-rocky-centipede.glitch.me/api/goods';
 const URLCategory = 'https://sable-rocky-centipede.glitch.me/api/categories';
 const URLImage = 'https://sable-rocky-centipede.glitch.me/';
-const URLSearch = 'https://sable-rocky-centipede.glitch.me/api/goods?page=1&search=';
+const URLSearch = 'https://sable-rocky-centipede.glitch.me/api/goods?search=';
 const headers = {
   'Content-Type': 'application/json',
 };
@@ -10,12 +10,14 @@ const tBody = document.querySelector('.table__body');
 const tableTotal = document.querySelector('.total-cost__price-table');
 const screenWidth = screen.width;
 const screenHeight = screen.height;
-
 const styles = new Map();
 const globalCounter = {
   totalAmountGoods: 0,
   amountSaved: 0,
 };
+const imgDataServer = {
+  saveDataImg: null,
+}
 
 export {
   URL,
@@ -30,4 +32,5 @@ export {
   screenHeight,
   styles,
   globalCounter,
+  imgDataServer 
 };

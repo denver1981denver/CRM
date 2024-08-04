@@ -12,7 +12,7 @@
 	display: flex;
 	justify-content: flex-end;
 	gap: 50px;
-	padding-right: 18px;
+	padding: 0 18px;
 	font-size: 12px;
 	font-weight: 600;
 	letter-spacing: 0.6px;
@@ -46,3 +46,10 @@
 .table__footer-btn:active {
 	color: var(--fonts-primary, #25213b);
 }
+
+@media (max-width: 1020px) {
+	.table__footer-wrap {
+		justify-content: center;
+	}
+}
+

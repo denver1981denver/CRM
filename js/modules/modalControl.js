@@ -6,6 +6,7 @@ const modalControl = categories => {
   document.body.addEventListener('click', async ({target}) => {
     const closeModal = overlay => {
       overlay.remove();
+      document.body.classList.remove('body-popap');
     };
 
     let modalElements;

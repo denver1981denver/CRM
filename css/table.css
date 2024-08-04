@@ -26,10 +26,12 @@
 .table__id {
 	width: 108px;
 	padding-left: 15px;
+	padding-right: 10px;
 }
 
 .table__name {
 	width: 304px;
+	padding-right: 10px;
 }
 
 .table__category {
