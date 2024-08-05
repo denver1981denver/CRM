@@ -50,6 +50,8 @@ export const createErrorWindow = async (dataError) => {
     </button>
   `);
   document.body.append(windowError);
+//  document.body.querySelector
+  document.body.classList.add('body-popap');
 
   return windowError;
 };
@@ -189,7 +191,7 @@ export const createModal = async (id, categories) => {
   overlay.classList.add('overlay');
   textID.classList.add('modal__id');
   if (id) {
-    textID.classList.add('modal__id--open');
+    textID.classList.add('modal__id');
     textID.textContent = `id: ${id}`;
   }
   form.classList.add('modal__form');
@@ -327,7 +329,8 @@ export const createModal = async (id, categories) => {
     errorImg,
   );
   discount.append(checkbox, wrapperDiscount);
-  heading.append(title, textID);
+  heading.append(title);
+  if(id) heading.append(textID);
   addFile.append(inputFile);
   previewWrapper.append(preview, previewRemove);
   fieldset.append(inputWrapper, previewWrapper);

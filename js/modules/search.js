@@ -12,7 +12,7 @@ export const searchControl = () => {
     searchTimeout = setTimeout(() => {
       tBody.textContent = '';
       fetchRequest(renderGoods, {data: 'search', dataSearch: search.value});
-     }, 300);
+    }, 300);
   });
 };
 

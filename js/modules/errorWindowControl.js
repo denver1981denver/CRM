@@ -2,6 +2,7 @@
 export const errorWindowControl = windowError => {
   const closeError = () => {
     windowError.remove();
+    document.body.classList.remove('body-popap');
   };
 
   document.body.addEventListener('click', ({target}) => {

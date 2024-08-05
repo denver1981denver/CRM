@@ -24,7 +24,7 @@ const fetchRequest = async (callback,
     if (id) url = `${URL}/${id}`;
     if (data === 'categories') url = URLCategory;
     if (data === 'search') url = `${URLSearch}${dataSearch}`;
-
+  
     const response = await fetch(url, options);
 
     if (response.ok) {

@@ -90,8 +90,15 @@ tr {
 	overflow: hidden;
 }
 
+@media (max-width: 585px) {
+	.overlay {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+}
+
 @media (max-width: 386px) {
 	.overlay {
-		padding: 0 10px;
+		padding: 20px 10px;
 	}
 }
